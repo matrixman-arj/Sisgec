@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layoutPadrao}">
+<head>
+	<title>Cadastro de curso</title>
+</head>
+
+<body>	
+<section layout:fragment="conteudo">
+
+			<p>Cadastro de curso</p>
+
+	<div class="container-fluid">
+	
+		<th:block th:include="fragments/MensagemSucesso"></th:block>		      
+	
+		<form method="POST" th:object="${curso}" class="form-vertical  js-form-loading">
+		
+			<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+				<label for="nome" class="control-label">Nome</label>
+				<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
+			</div>
+	
+			<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error" >
+				<label for="descricao" class="control-label">Descrição</label>
+				<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
+			</div>
+	
+			<div class="row">			
+				<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('tipoCurso')} ? has-error">
+					<label for="tipoCurso" class="control-label">Tipo</label>
+					
+					<div class="sisgec-field-action">
+						<select id="tipoCurso" class="form-control" th:field="*{tipoCurso}">
+							<option value="">Selecione o tipo</option>
+							<option th:each="tipoCurso : ${tiposCursos}" th:value="${tipoCurso.codigo_tipoCurso}" th:text="${tipoCurso.nome}">Técnico</option>
+							
+						</select>						
+						<div class="sisgec-field-action__icon">
+							<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoTipoCurso">
+								<i class="glyphicon  glyphicon-plus-sign sisgec-glyphicon-large"></i>
+							</a>
+						</div>					
+					</div>
+				</div>
+				
+				<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('valor')} ? has-error">
+					<label for="valor" class="control-label">Valor</label>
+					<div class="input-group">
+						<div class="input-group-addon">R$</div>
+						<input id="valor" type="text" class="form-control  js-decimal" th:field="*{valor}"/>
+					</div>
+				</div>
+				
+				<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('turno')} ? has-error">
+					<label for="turno" class="control-label">Turno</label>
+					<select id="turno" class="form-control" th:field="*{turno}">
+						<option value="">Selecione o turno</option>
+						<option th:each="turno : ${turnos}" th:value="${turno}" th:text="${turno.descricao}">Manhã</option>
+					</select>
+				</div>
+				
+				<div class="col-sm-3  form-group" th:classappend="${#fields.hasErrors('cargaHoraria')} ? has-error">
+					<label for="cargaHoraria" class="control-label">Carga horária</label>
+					<div class="input-group">
+						<div class="input-group-addon">Horas</div>
+						<input id="cargaHoraria" type="text" class="form-control  js-plain" th:field="*{cargaHoraria}"/>
+					</div>
+				</div>
+								
+			</div>
+			
+			<div class="row">				
+<!-- 				<div class="col-sm-9  form-group"> -->
+<!-- 					<label for="disciplina">Disciplina</label> -->
+<!-- 					<div> -->
+<!-- 						<th:block th:each="disciplina : ${disciplinas}"> -->
+<!-- 							<div class="checkbox checkbox-inline"> -->
+<!-- 								<input th:id="|id_${disciplina}|" th:type="checkbox" th:value="${disciplina.codigo}" th:checked="true"> -->
+<!-- 								<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" checked>Farma</label> -->
+<!-- 							</div> -->
+<!-- 						</th:block>																 -->
+<!-- 					</div>					 -->
+<!-- 				</div> -->
+				
+				<div class="col-sm-9  form-group" th:classappend="${#fields.hasErrors('cargaHoraria')} ? has-error">
+					<label for="disciplina" class="control-label">Disciplina</label>
+					<div>
+						<th:block th:each="disciplina : ${disciplinas}">
+							<div class="radio radio-inline">
+								<input th:id="|id_${disciplina}|" th:type="radio" th:value="${disciplina.codigo_disciplina}" th:field="*{disciplina}">
+								<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
+							</div>
+						</th:block>																
+					</div>					
+				</div>	
+								
+			</div>
+			
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>					
+			</div>
+	
+		</form>
+	</div>
+	
+	<div th:replace="curso/tipoCurso/CadastroRapidoTipoCurso :: modal "></div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/tipoCurso.cadastro-rapido.js}"></script>
+</th:block>
+
+</body>
+</html>

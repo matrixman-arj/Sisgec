@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layoutPadrao}">
+<head>
+	<title>Cadastro de curso</title>
+</head>
+
+<body>	
+<section layout:fragment="conteudo">
+
+			<p>Cadastro de tipos de curso</p>
+
+	<div class="container-fluid">
+	
+		<th:block th:include="fragments/MensagemSucesso"></th:block>		      
+	
+		<form method="POST" th:object="${tipoCurso}" class="form-vertical  js-form-loading">
+		
+			<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+				<label for="nome" class="control-label">Nome</label>
+				<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
+			</div>
+			
+			<div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error" >
+				<label for="descricao" class="control-label">Descrição</label>
+				<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
+			</div>			
+			
+			<div class="form-group">
+				<button class="btn  btn-primary" type="submit">Salvar</button>					
+			</div>
+	
+		</form>
+	</div>
+	
+	<div th:replace="curso/tipoCurso/CadastroRapidoTipoCurso :: modal "></div>
+</section>
+
+</body>
+</html>

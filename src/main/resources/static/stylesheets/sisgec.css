@@ -1,0 +1,38 @@
+/*
+#########################
+#	   UTILIDADES       #
+#########################
+*/
+.sisgec-glyphicon-large {
+	font-size: 18px;
+}
+
+.sisgec-title-page h1 {
+	text-align: center;
+}
+
+
+
+/*
+#########################
+#	   COMPONENTES      #
+#########################
+*/
+/* Field Action */
+.sisgec-field-action {
+	display: flex;
+}
+
+.sisgec-field-action__icon {
+	margin: 6px 0 0 5px;
+}
+
+.sisgec-page-header-texto {
+	margin-top: 70px;
+}
+
+.sisgec-page-header-texto p{
+	text-align: center; 
+	font-size:22px;
+	font-weight:bold;
+}
