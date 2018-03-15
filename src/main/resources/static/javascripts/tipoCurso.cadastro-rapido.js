@@ -17,17 +17,51 @@ Sisgec.TipoCursoCadastroRapido = (function(){
 	TipoCursoCadastroRapido.prototype.iniciar = function() {
 		this.form.on('submit', function(event) { event.preventDefault() });	
 		this.modal.on('shown.bs.modal', onModalShow.bind(this));
-//		this.modal.on('hide.bs.modal', onModalClose);
-//		this.botaoSalvar.on('click', onBotaoSalvarClick);
+		this.modal.on('hide.bs.modal', onModalClose.bind(this));
+		this.botaoSalvar.on('click', onBotaoSalvarClick.bind(this));
 		
 	}
 	
 	function onModalShow() {
 		this.inputNomeTipo.focus();
+	}	
+	
+	function onModalClose() {
+		this.inputNomeTipo.val('');
+		this.inputDescricaoTipo.val('');
+		this.containerMensagemErro.addClass('hidden');
+		this.form.find('.form-group').removeClass('has-error');
 	}
 	
-	return TipoCursoCadastroRapido;
+	function onBotaoSalvarClick() {
+		var nomeTipo = this.inputNomeTipo.val().trim();
+		var descricaoTipo = this.inputDescricaoTipo.val().trim();
+		$.ajax({
+			url: this.url,
+			method: 'POST',
+			contentType: 'application/json',			
+			data: JSON.stringify({ nome: nomeTipo, descricao: descricaoTipo }),			
+			error: onErroSalvandoTipo.bind(this),
+			success: onTipoCursoSalvo.bind(this)
+		});
+	}
 	
+	function onErroSalvandoTipo(obj) {
+		var mensagemErro = obj.responseText;
+		this.containerMensagemErro.removeClass('hidden');
+		this.containerMensagemErro.html('<span>' + mensagemErro + '</span>');		
+		this.form.find('.form-group').addClass('has-error');
+	}
+	
+	function onTipoCursoSalvo(tipoCurso) {
+		var comboTipoCurso = $('#tipoCurso');
+		comboTipoCurso.append('<option value=' + tipoCurso.codigo_tipoCurso + '>' + tipoCurso.nome + '</option>');
+		comboTipoCurso.val(tipoCurso.codigo_tipoCurso);
+		this.modal.modal('hide');
+		
+	}
+	
+	return TipoCursoCadastroRapido;	
 	
 }());
 
@@ -35,41 +69,4 @@ $(function() {
 	
 	var tipoCursoCadastroRapido = new Sisgec.TipoCursoCadastroRapido();
 	tipoCursoCadastroRapido.iniciar();
-	
-	
-//	function onModalClose() {
-//		inputNomeTipo.val('');
-//		inputDescricaoTipo.val('');
-//		containerMensagemErro.addClass('hidden');
-//		form.find('.form-group').removeClass('has-error');
-//	}
-//	
-//	function onBotaoSalvarClick() {
-//		var nomeTipo = inputNomeTipo.val().trim();
-//		var descricaoTipo = inputDescricaoTipo.val().trim();
-//		$.ajax({
-//			url: url,
-//			method: 'POST',
-//			contentType: 'application/json',			
-//			data: JSON.stringify({ nome: nomeTipo, descricao: descricaoTipo }),			
-//			error: onErroSalvandoTipo,
-//			success: onTipoCursoSalvo
-//		});
-//	}
-//	
-//	function onErroSalvandoTipo(obj) {
-//		var mensagemErro = obj.responseText;
-//		containerMensagemErro.removeClass('hidden');
-//		containerMensagemErro.html('<span>' + mensagemErro + '</span>');		
-//		form.find('.form-group').addClass('has-error');
-//	}
-//	
-//	function onTipoCursoSalvo(tipoCurso) {
-//		var comboTipoCurso = $('#tipoCurso');
-//		comboTipoCurso.append('<option value=' + tipoCurso.codigo_tipoCurso + '>' + tipoCurso.nome + '</option>');
-//		comboTipoCurso.val(tipoCurso.codigo_tipoCurso);
-//		modal.modal('hide');
-//		
-//	}
-	
 });
