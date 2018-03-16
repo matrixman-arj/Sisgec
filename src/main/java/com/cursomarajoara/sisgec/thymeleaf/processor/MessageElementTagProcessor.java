@@ -1,6 +1,8 @@
 package com.cursomarajoara.sisgec.thymeleaf.processor;
 
 import org.thymeleaf.context.ITemplateContext;
+import org.thymeleaf.model.IModel;
+import org.thymeleaf.model.IModelFactory;
 import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.processor.element.AbstractElementTagProcessor;
 import org.thymeleaf.processor.element.IElementTagStructureHandler;
@@ -18,8 +20,13 @@ public class MessageElementTagProcessor extends AbstractElementTagProcessor{
 	}
 	@Override
 	protected void doProcess(ITemplateContext context, IProcessableElementTag tag, IElementTagStructureHandler structureHandler) {
+		IModelFactory modelFactory = context.getModelFactory();
+		IModel model = modelFactory.createModel();
 		
+		model.add(modelFactory.createStandaloneElementTag("th:block", "th:include", "fragments/MensagemSucesso"));
+		model.add(modelFactory.createStandaloneElementTag("th:block", "th:include", "fragments/MensagensErroValidacao"));
 		
+		structureHandler.replaceWith(model, true);
 	}
 
 }

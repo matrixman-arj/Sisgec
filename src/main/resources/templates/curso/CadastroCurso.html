@@ -13,13 +13,11 @@
 
 			<p>Cadastro de curso</p>
 
-	<div class="container-fluid">
-	
-		<th:block th:include="fragments/MensagemSucesso"></th:block>		      
+	<div class="container-fluid">				      
 	
 		<form method="POST" th:object="${curso}" class="form-vertical  js-form-loading">
 		
-			<th:block th:include="fragments/MensagensErroValidacao"></th:block>
+			<sisgec:message/>
 			
 			<div class="form-group" sisgec:classforerror="nome">
 				<label for="nome" class="control-label">Nome</label>
