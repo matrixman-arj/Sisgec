@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  layout:decorate="~{layout/layoutPadrao}"
-	  xmlns:sisgec="http://sisgec.cursomarajoara.com">
+<html layout:decorate="~{layout/layoutPadrao}">
 <head>
 	<title>Cadastro de curso</title>
 </head>
@@ -11,8 +7,12 @@
 <body>	
 <section layout:fragment="conteudo">
 
+	<div class="page-header">
+		<div class="container-fluid">
 			<p>Cadastro de curso</p>
-
+		</div>
+	</div>
+	
 	<div class="container-fluid">				      
 	
 		<form method="POST" th:object="${curso}" class="form-vertical  js-form-loading">
