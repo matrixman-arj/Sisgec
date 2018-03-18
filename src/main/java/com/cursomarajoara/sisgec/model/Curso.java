@@ -60,7 +60,12 @@ public class Curso implements Serializable {
 	@NotNull(message = " O campo valor é obtigatório")
 	@DecimalMin("0.01")
 	@DecimalMax(value = "9999999.99", message = "O Valor do curso deve ser menor que R$ 9.999.999,99")
-	private BigDecimal valor;	
+	private BigDecimal valor;
+	
+	private String foto;
+	
+	@Column(name = "content_type")
+	private String contentType;
 		
 	public String getNome() {
 		return nome;
@@ -115,8 +120,21 @@ public class Curso implements Serializable {
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}	
+	
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
+	public String getContentType() {
+		return contentType;
+	}
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
 	
 	@Override
 	public int hashCode() {
