@@ -8,7 +8,9 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="com.cursomarajoara.sisgec.controller" level="info"/>
+		<Logger name="com.cursomarajoara.sisgec" level="debug"/>
+		
+		<Logger name="org.hibernate.sql" level="debug"/>
 	
 		<Root level="info">
 			<AppenderRef ref="Console" />
