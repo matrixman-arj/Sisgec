@@ -2,6 +2,7 @@ package com.cursomarajoara.sisgec.storage.local;
 
 import static java.nio.file.FileSystems.getDefault;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,7 +53,14 @@ public class FotoStorageLocal implements FotoStorage {
 
 	@Override
 	public void salvarTemporariamente(MultipartFile[] files) {
-		System.out.println(">>> Salvando a foto temporariamente...");
+		if (files != null && files.length > 0) {
+			MultipartFile arquivo = files[0];
+			try {
+				arquivo.transferTo(new File(this.localTemporario.toAbsolutePath().toString() + getDefault().getSeparator() + arquivo.getOriginalFilename()));
+			} catch (IOException e) {
+				throw new RuntimeException("Erro ao tentar salvar a foto na pasta temporária", e);
+			}
+		}
 	}
 
 }
