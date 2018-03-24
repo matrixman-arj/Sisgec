@@ -109,11 +109,13 @@
 				
 					<label class="control-label">Foto</label>
 					
-					<div id="upload-drop" class="sisgec-upload">
-						<i class="glyphicon  glyphicon-cloud-upload"></i>
-						<span>Arraste a foto aqui ou </span>
-						<a class="sisgec-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
-					</div>
+					<div class="js-container-foto-curso">
+						<div id="upload-drop" class="sisgec-upload">
+							<i class="glyphicon  glyphicon-cloud-upload"></i>
+							<span>Arraste a foto aqui ou </span>
+							<a class="sisgec-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+						</div>
+					</div>					
 				</div>
 			</div>	
 								
@@ -127,12 +129,14 @@
 	</div>
 	
 	<div th:replace="curso/tipoCurso/CadastroRapidoTipoCurso :: modal "></div>
+	<th:block th:replace="hbs/FotoCurso"></th:block>
 </section>
 
 <th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/tipoCurso.cadastro-rapido.js}"></script>
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
+	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
 	
 	<script>
 	$(function() {
@@ -141,9 +145,31 @@
 				filelimit: 1,
 				allow: '*.(jpg|jpeg|png)',
 				action: '/sisgec/fotos',
-				complete: function(resposta) {					
-					$('input[name=foto]').val(resposta.nome);
-					$('input[name=contentType]').val(resposta.contentType);
+				complete: function(resposta) {
+					var inputNomeFoto = $('input[name=foto]');
+					var inputContentType = $('input[name=contentType]');
+					
+					var htmlFotoCursoTemplate = $('#foto-curso').html();
+					var template = Handlebars.compile(htmlFotoCursoTemplate);
+					var htmlFotoCurso = template({nomeFoto: resposta.nome});
+					
+					var containerFotoCurso = $('.js-container-foto-curso');
+					
+					var uploadDrop = $('#upload-drop');
+					
+					inputNomeFoto.val(resposta.nome);
+					inputContentType.val(resposta.contentType);
+					
+					
+					uploadDrop.addClass('hidden');
+					containerFotoCurso.append(htmlFotoCurso);
+					
+					$('.js-remove-foto').on('click', function() {
+						$('.js-foto-curso').remove();
+						uploadDrop.removeClass('hidden');
+						inputNomeFoto.val('');
+						inputContentType.val('');
+					});
 				}
 		};
 		
