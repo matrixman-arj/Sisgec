@@ -117,9 +117,7 @@
 						</div>
 					</div>					
 				</div>
-			</div>	
-								
-			
+			</div>			
 			
 			<div class="form-group">
 				<button class="btn  btn-primary" type="submit">Salvar</button>					
@@ -137,46 +135,8 @@
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
+	<script th:src="@{/javascripts/curso.upload-foto.js}"></script>
 	
-	<script>
-	$(function() {
-		var settings = {
-				type: 'json',
-				filelimit: 1,
-				allow: '*.(jpg|jpeg|png)',
-				action: '/sisgec/fotos',
-				complete: function(resposta) {
-					var inputNomeFoto = $('input[name=foto]');
-					var inputContentType = $('input[name=contentType]');
-					
-					var htmlFotoCursoTemplate = $('#foto-curso').html();
-					var template = Handlebars.compile(htmlFotoCursoTemplate);
-					var htmlFotoCurso = template({nomeFoto: resposta.nome});
-					
-					var containerFotoCurso = $('.js-container-foto-curso');
-					
-					var uploadDrop = $('#upload-drop');
-					
-					inputNomeFoto.val(resposta.nome);
-					inputContentType.val(resposta.contentType);
-					
-					
-					uploadDrop.addClass('hidden');
-					containerFotoCurso.append(htmlFotoCurso);
-					
-					$('.js-remove-foto').on('click', function() {
-						$('.js-foto-curso').remove();
-						uploadDrop.removeClass('hidden');
-						inputNomeFoto.val('');
-						inputContentType.val('');
-					});
-				}
-		};
-		
-		UIkit.uploadSelect($('#upload-select'), settings);
-		UIkit.uploadDrop($('#upload-drop'), settings);
-	});
-	</script>
 	
 </th:block>
 
