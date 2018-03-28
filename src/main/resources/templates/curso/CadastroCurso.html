@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout/layoutPadrao}">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	
+	  layout:decorate="~{layout/layoutPadrao}">
 
 <head>
 	<title>Cadastro de curso</title>
@@ -22,18 +24,18 @@
 		
 			<sisgec:message/>
 			
-			<div class="form-group" sisgec:classforerror="nome">
+			<div class="form-group sisgec-required" sisgec:classforerror="nome">
 				<label for="nome" class="control-label">Nome</label>
 				<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
 			</div>
 	
-			<div class="form-group" sisgec:classforerror="descricao" >
+			<div class="form-group sisgec-required" sisgec:classforerror="descricao" >
 				<label for="descricao" class="control-label">Descrição</label>
 				<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
 			</div>
 	
 			<div class="row">			
-				<div class="col-sm-3  form-group" sisgec:classforerror="tipoCurso">
+				<div class="col-sm-3  form-group sisgec-required" sisgec:classforerror="tipoCurso">
 					<label for="tipoCurso" class="control-label">Tipo</label>
 					
 					<div class="sisgec-field-action">
@@ -50,7 +52,7 @@
 					</div>
 				</div>
 				
-				<div class="col-sm-3  form-group" sisgec:classforerror="valor">
+				<div class="col-sm-3  form-group sisgec-required" sisgec:classforerror="valor">
 					<label for="valor" class="control-label">Valor</label>
 					<div class="input-group">
 						<div class="input-group-addon">R$</div>
@@ -58,7 +60,7 @@
 					</div>
 				</div>
 				
-				<div class="col-sm-3  form-group" sisgec:classforerror="turno">
+				<div class="col-sm-3  form-group sisgec-required" sisgec:classforerror="turno">
 					<label for="turno" class="control-label">Turno</label>
 					<select id="turno" class="form-control" th:field="*{turno}">
 						<option value="">Selecione o turno</option>
@@ -66,7 +68,7 @@
 					</select>
 				</div>
 				
-				<div class="col-sm-3  form-group" sisgec:classforerror="cargaHoraria">
+				<div class="col-sm-3  form-group sisgec-required" sisgec:classforerror="cargaHoraria">
 					<label for="cargaHoraria" class="control-label">Carga horária</label>
 					<div class="input-group">
 						<div class="input-group-addon">Horas</div>
@@ -89,7 +91,7 @@
 <!-- 					</div>					 -->
 <!-- 				</div> -->
 				
-				<div class="col-sm-9  form-group" sisgec:classforerror="disciplina">
+				<div class="col-sm-9  form-group sisgec-required" sisgec:classforerror="disciplina">
 					<label for="disciplina" class="control-label">Disciplina</label>
 					<div>
 						<th:block th:each="disciplina : ${disciplinas}">

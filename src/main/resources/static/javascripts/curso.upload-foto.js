@@ -25,6 +25,11 @@ Sisgec.UploadFoto = (function(){
 		
 		UIkit.uploadSelect($('#upload-select'), settings);
 		UIkit.uploadDrop(this.uploadDrop, settings);
+		
+		if (this.inputNomeFoto.val()) {
+			onUploadCompleto.call(this, {nome: this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
+		}
+		
 	}
 	
 	function onUploadCompleto(resposta) {

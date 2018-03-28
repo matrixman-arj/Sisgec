@@ -11,7 +11,9 @@
 	text-align: center;
 }
 
-
+.sisgec-required > .control-label:after{
+	content: "*"
+}
 
 /*
 #########################
