@@ -20,7 +20,7 @@ Sisgec.UploadFoto = (function(){
 				filelimit: 1,
 				allow: '*.(jpg|jpeg|png)',
 				action: this.containerFotoCurso.data('url-fotos'),
-				complete: onUploadCompleto.bind(this),
+				complete: onUploadCompleto.bind(this)
 		}
 		
 		UIkit.uploadSelect($('#upload-select'), settings);
