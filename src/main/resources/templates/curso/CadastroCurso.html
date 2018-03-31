@@ -14,7 +14,20 @@
 
 	<div class="page-header">
 		<div class="container-fluid">
-			<p>Cadastro de curso</p>
+			<div class="row">
+				<div class="col-sm-10">
+					<p>Cadastro de curso</p>
+				</div>
+			
+			<div class="col-sm-2">
+					<div class="marajoara-page-header-controls">
+						<a class="btn btn-default" th:href="@{/cursos}">
+							<i class="glyphicon glyphicon-plus-sign"></i> <span class="hidden-xs hidden-sm">Pesquisar</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 	
@@ -36,8 +49,7 @@
 	
 			<div class="row">			
 				<div class="col-sm-3  form-group sisgec-required" sisgec:classforerror="tipoCurso">
-					<label for="tipoCurso" class="control-label">Tipo</label>
-					
+					<label for="tipoCurso" class="control-label">Tipo</label>					
 					<div class="sisgec-field-action">
 						<select id="tipoCurso" class="form-control" th:field="*{tipoCurso}">
 							<option value="">Selecione o tipo</option>

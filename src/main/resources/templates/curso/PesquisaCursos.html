@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	
+	  layout:decorate="~{layout/layoutPadrao}"
+	  xmlns:sisgec="http://sisgec.marajoara.com">
+
+<head>
+	<title>Pesquisa de cursos</title>	
+</head>
+
+<body>	
+<section layout:fragment="conteudo">
+
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10">
+					<p>Pesquisa de cursos</p>
+				</div>
+				
+				<div class="col-sm-2">
+					<div class="marajoara-page-header-controls">
+						<a class="btn btn-default" th:href="@{/cursos/novo}">
+							<i class="glyphicon glyphicon-plus-sign"></i> <span class="hidden-xs hidden-sm">Novo Curso</span>
+						</a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="container-fluid">				      
+	
+		<form method="GET">
+		
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label class="control-label" for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus"/>				
+				</div>
+				
+				<div class="form-group col-sm-6">
+					<label class="control-label" for="descricao">Descrição</label>
+					<input type="text" class="form-control" id="descricao"/>				
+				</div>
+			
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label class="control-label" for="tipo">Tipo</label>
+					<select id="tipo" class="form-control">
+						<option value="">Todos os tipos</option>
+						<option th:each="tipo : ${tiposCursos}" th:text="${tipo.nome}" th:value="${tipo.codigo_tipoCurso}"></option>
+					</select>								
+				</div>
+				
+				<div class="form-group col-sm-6">
+					<label class="control-label" for="turno">Turno</label>
+					<select id="tipo" class="form-control">
+						<option value="">Todos os turnos</option>
+						<option th:each="turno : ${turnos}" th:value="${turno}" th:text="${turno.descricao}"></option>
+					</select>			
+				</div>
+			
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-sm-12">
+						<label class="control-label">Disciplina</label>
+						<div>
+							<th:block th:each="disciplina : ${disciplinas}">
+								<div class="radio radio-inline">
+									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina}" name="disciplina"/>
+									<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
+								</div>
+							</th:block>
+							<div class="radio radio-inline">
+								<input id="todasDisciplinas" type="radio" th:checked="*{disciplina} == null" name="disciplina"/>
+								<label for="todasDisciplinas">Todas</label>
+							</div>																
+						</div>					
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Pesquisar</button>
+		
+		</form>
+		<div class="table-responsive sisgec-tabela-simples">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="table-cursos-col-foto"></th>
+						<th class="table-cursos-col-nome">Nome</th>
+						<th class="table-cursos-col-descricao">Descrição</th>
+						<th class="table-cursos-col-disciplina">Disciplina</th>
+						<th class="table-cursos-col-acoes"></th>
+					</tr>			
+				</thead>
+				<tbody>
+					<tr th:each="curso : ${cursos}">
+						<td class="text-center">
+							<img th:src="@{/fotos/temp/{foto}(foto=${curso.foto})}" class="img-responsive">
+						</td>
+						<td th:text="${curso.nome}">Enfermagem</td>
+						<td th:text="${curso.descricao}">Curso de Enfermagem</td>
+						<td th:text="${curso.disciplina.nome}"></td>
+						<td class="text-center">
+							<a class="btn btn-link btn-xs" title="Edital">
+								<i class="glyphicon glyphicon-pencil"></i>
+							</a>
+							
+							<a class="btn btn-link btn-xs" title="Excluir">
+								<i class="glyphicon glyphicon-remove"></i>
+							</a>
+						</td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</section>
+</body>
+</html>
