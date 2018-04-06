@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cursomarajoara.sisgec.storage.FotoStorage;
 
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
+
 public class FotoStorageLocal implements FotoStorage {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FotoStorageLocal.class); 
@@ -31,8 +34,6 @@ public class FotoStorageLocal implements FotoStorage {
 		this.local = path;
 		criarPastas();
 	}
-
-
 
 
 	@Override
@@ -59,6 +60,32 @@ public class FotoStorageLocal implements FotoStorage {
 			throw new RuntimeException("Erro lendo a foto temporária", e );
 		}
 	}
+	
+	@Override
+	public void salvar(String foto) {
+		try {
+			Files.move(this.localTemporario.resolve(foto), this.local.resolve(foto));
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao tentar mover foto para o destino final! ", e);
+		}	
+		
+		try {
+			Thumbnails.of(this.local.resolve(foto).toString()).size(50, 50).toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+		} catch (IOException e) {
+			throw new RuntimeException("Erro ao tentar gerar thumbnail", e);
+		}
+		
+	}
+	
+	@Override
+	public byte[] recuperarFoto(String nome) {
+		try {
+			return Files.readAllBytes(this.local.resolve(nome));
+		} catch (IOException e) {
+			throw new RuntimeException("Erro lendo a foto", e );
+		}	
+	}
+
 
 	private void criarPastas() {
 		try {
@@ -84,6 +111,6 @@ public class FotoStorageLocal implements FotoStorage {
 			logger.debug(String.format("Nome original: %s, novo nome: %s", nomeOriginal, novoNome));
 		}
 		return novoNome;
-	}
+	}	
 
 }

@@ -92,7 +92,7 @@
 ###################
 */
 
-/* Colunas - Pesquisa de Cervejas */
+/* Colunas - Pesquisa de Cursos */
 .table-cursos-col-foto {
 	min-width: 50px;
 	width: 50px
@@ -108,11 +108,11 @@
 }
 
 .table-cursos-col-descricao {
-	width: 120px;
+	width: 240px;
 }
 
 .table-cursos-col-disciplina {
-	width: 100px;
+	width: 160px;
 }
 
 .table-cursos-col-valor {
@@ -122,4 +122,9 @@
 
 .table-cursos-col-acoes {
 	width: 80px;
+}
+
+.sisgec-pesquisa-vazia{
+	text-align: center;
+	color: red;
 }

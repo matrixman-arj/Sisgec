@@ -19,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.enuns.Turno;
 
@@ -134,6 +135,10 @@ public class Curso implements Serializable {
 	}
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	
+	public String getFotoOuMock() {
+		return !StringUtils.isEmpty(foto) ? foto : "foto-mock.png";
 	}
 	
 	@Override

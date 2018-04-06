@@ -101,7 +101,7 @@
 				<tbody>
 					<tr th:each="curso : ${cursos}">
 						<td class="text-center">
-							<img th:src="@{/fotos/temp/{foto}(foto=${curso.foto})}" class="img-responsive">
+							<img th:src="@{/fotos/thumbnail.{foto}(foto=${curso.fotoOuMock})}" class="img-responsive">
 						</td>
 						<td th:text="${curso.nome}">Enfermagem</td>
 						<td th:text="${curso.descricao}">Curso de Enfermagem</td>
@@ -116,8 +116,8 @@
 							</a>
 						</td>						
 					</tr>
-					<tr th:if="${#lists.empty()}">
-						<td colspan="5" style="text-align: center">Nenhum curso encontrado</td>
+					<tr class="sisgec-pesquisa-vazia" th:if="${#lists.isEmpty(cursos)}">
+						<td colspan="5">Nenhum curso encontrado!</td>
 					</tr>
 				</tbody>
 			</table>

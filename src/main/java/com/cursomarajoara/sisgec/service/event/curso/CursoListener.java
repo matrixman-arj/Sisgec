@@ -14,8 +14,9 @@ public class CursoListener {
 	
 	@EventListener(condition = "#evento.temFoto()")
 	public void cursoSalvo(CursoSalvoEvent evento) {
-		System.out.println("Novo curso salvo - " + evento.getCurso().getNome());
-		//fotoStorage.salvar(evento.getCurso().getFoto());
+		
+		fotoStorage.salvar(evento.getCurso().getFoto());
+		
 	}
 
 }
