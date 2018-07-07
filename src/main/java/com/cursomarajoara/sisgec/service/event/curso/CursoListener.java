@@ -14,7 +14,7 @@ public class CursoListener {
 	
 	@EventListener(condition = "#evento.temFoto()")
 	public void cursoSalvo(CursoSalvoEvent evento) {		
-		//fotoStorage.salvar(evento.getCurso().getFoto());
+		fotoStorage.salvar(evento.getCurso().getFoto());
 
 		
 
