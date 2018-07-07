@@ -4,8 +4,6 @@ import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.model.Curso;
 
-
-
 public class CursoSalvoEvent {
 	
 	private Curso curso;

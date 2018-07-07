@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cursomarajoara.sisgec.enuns.Turno;
 import com.cursomarajoara.sisgec.model.Curso;
-import com.cursomarajoara.sisgec.model.Disciplina;
 import com.cursomarajoara.sisgec.repository.Cursos;
 import com.cursomarajoara.sisgec.repository.Disciplinas;
 import com.cursomarajoara.sisgec.repository.TiposCursos;
