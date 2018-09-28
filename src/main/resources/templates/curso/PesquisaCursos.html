@@ -33,17 +33,17 @@
 	
 	<div class="container-fluid">				      
 	
-		<form method="GET">
+		<form method="GET" th:object="${cursoFilter}">
 		
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="control-label" for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" autofocus="autofocus"/>				
+					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>				
 				</div>
 				
 				<div class="form-group col-sm-6">
 					<label class="control-label" for="descricao">Descrição</label>
-					<input type="text" class="form-control" id="descricao"/>				
+					<input type="text" class="form-control" id="descricao" th:field="*{descricao}"/>				
 				</div>
 			
 			</div>
@@ -51,7 +51,7 @@
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="control-label" for="tipo">Tipo</label>
-					<select id="tipo" class="form-control">
+					<select id="tipo" class="form-control" th:field="*{tipo}" >
 						<option value="">Todos os tipos</option>
 						<option th:each="tipo : ${tiposCursos}" th:text="${tipo.nome}" th:value="${tipo.codigo_tipoCurso}"></option>
 					</select>								
@@ -59,7 +59,7 @@
 				
 				<div class="form-group col-sm-6">
 					<label class="control-label" for="turno">Turno</label>
-					<select id="tipo" class="form-control">
+					<select id="turno" class="form-control" th:field="*{turno}" >
 						<option value="">Todos os turnos</option>
 						<option th:each="turno : ${turnos}" th:value="${turno}" th:text="${turno.descricao}"></option>
 					</select>			
@@ -73,7 +73,7 @@
 						<div>
 							<th:block th:each="disciplina : ${disciplinas}">
 								<div class="radio radio-inline">
-									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina}" name="disciplina"/>
+									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina}" th:field="*{disciplina}"/>
 									<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
 								</div>
 							</th:block>

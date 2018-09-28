@@ -17,6 +17,7 @@ import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.repository.Cursos;
 import com.cursomarajoara.sisgec.repository.Disciplinas;
 import com.cursomarajoara.sisgec.repository.TiposCursos;
+import com.cursomarajoara.sisgec.repository.filter.CursoFilter;
 import com.cursomarajoara.sisgec.service.CadastroCursoService;
 
 @Controller
@@ -58,7 +59,7 @@ public class CursosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar() {
+	public ModelAndView pesquisar(CursoFilter cervejaFilter, BindingResult result) {
 		ModelAndView mv = new ModelAndView("curso/PesquisaCursos");
 		mv.addObject("tiposCursos", tiposCursos.findAll());
 		mv.addObject("turnos", Turno.values());
