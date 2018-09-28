@@ -6,8 +6,7 @@ import com.cursomarajoara.sisgec.model.Curso;
 
 public class CursoSalvoEvent {
 	
-	private Curso curso;	
-	
+	private Curso curso;
 
 	public CursoSalvoEvent(Curso curso) {		
 		this.curso = curso;
