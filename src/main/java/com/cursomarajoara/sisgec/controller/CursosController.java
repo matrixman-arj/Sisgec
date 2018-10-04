@@ -59,12 +59,14 @@ public class CursosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(CursoFilter cervejaFilter, BindingResult result) {
+	public ModelAndView pesquisar(CursoFilter cursoFilter, BindingResult result) {
 		ModelAndView mv = new ModelAndView("curso/PesquisaCursos");
+		
 		mv.addObject("tiposCursos", tiposCursos.findAll());
 		mv.addObject("turnos", Turno.values());
 		mv.addObject("disciplinas", disciplinas.findAll());
-		mv.addObject("cursos", cursos.findAll());
+		mv.addObject("cursos", cursos.filtrar(cursoFilter));		
+		
 		return mv;
 	}
 	
