@@ -65,7 +65,7 @@ public class CursosController {
 		mv.addObject("tiposCursos", tiposCursos.findAll());
 		mv.addObject("turnos", Turno.values());
 		mv.addObject("disciplinas", disciplinas.findAll());
-		mv.addObject("cursos", cursos.filtrar(cursoFilter));		
+		mv.addObject("cursos", cursos.filtrar(cursoFilter));
 		
 		return mv;
 	}

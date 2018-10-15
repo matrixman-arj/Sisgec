@@ -9,7 +9,7 @@ public class CursoFilter {
 	
 	private String nome;	
 	private Disciplina disciplina;
-	private TipoCurso tipo;
+	private TipoCurso tipoCurso;
 	private Turno turno;
 	private Curso curso;
 	
@@ -28,16 +28,16 @@ public class CursoFilter {
 		this.disciplina = disciplina;
 	}
 	
-	public TipoCurso getTipo() {
-		return tipo;
+	public TipoCurso getTipoCurso() {
+		return tipoCurso;
 	}
-	public void setTipo(TipoCurso tipo) {
-		this.tipo = tipo;
-		
+	public void setTipoCurso(TipoCurso tipoCurso) {
+		this.tipoCurso = tipoCurso;
 	}
 	public Turno getTurno() {
 		return turno;
 	}
+	
 	public void setTurno(Turno turno) {
 		this.turno = turno;
 		
@@ -48,5 +48,5 @@ public class CursoFilter {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-	
+		
 }

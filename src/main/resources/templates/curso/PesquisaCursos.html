@@ -40,14 +40,29 @@
 					<input type="text" class="form-control" id="nome" autofocus="autofocus" th:field="*{nome}"/>				
 				</div>
 				
+				<div class="form-group col-sm-6">
+					<label class="control-label" for="tipoCurso">Tipo</label>
+					<select id="tipoCurso" class="form-control" th:field="*{tipoCurso}" >
+						<option value="">Todos os tipos</option>
+						<option th:each="tipoCurso : ${tiposCursos}" th:text="${tipoCurso.nome}" th:value="${tipoCurso.codigo_tipoCurso}"></option>
+					</select>								
+				</div>
+
 <!-- 				<div class="form-group col-sm-6"> -->
-<!-- 					<label class="control-label" for="tipo">Tipo</label> -->
-<!-- 					<select id="tipo" class="form-control" th:field="*{tipo}" > -->
-<!-- 						<option value="">Todos os tipos</option> -->
-<!-- 						<option th:each="tipo : ${tiposCursos}" th:text="${tipo.nome}" th:value="${tipo.codigo_tipoCurso}"></option> -->
-<!-- 					</select>								 -->
-<!-- 				</div> -->
-				
+<!-- 					<label class="control-label">Tipo</label> -->
+<!-- 					<div> -->
+<!-- 						<th:block th:each="tipoCurso : ${tiposCursos}"> -->
+<!-- 							<div class="radio radio-inline"> -->
+<!-- 								<input th:id="|id_${tipoCurso}|" type="radio" th:value="${tipoCurso.codigo_tipoCurso}" th:field="*{tipoCurso}"/> -->
+<!-- 								<label th:for="|id_${tipoCurso}|" th:text="${tipoCurso.nome}" class="control-label">Farma</label> -->
+<!-- 							</div> -->
+<!-- 						</th:block> -->
+<!-- 						<div class="radio radio-inline"> -->
+<!-- 							<input id="todosCursos" type="radio" th:checked="*{tipoCurso} == null" name="tipoCurso"/> -->
+<!-- 							<label for="todosCursos">Todos</label> -->
+<!-- 						</div>																 -->
+<!-- 					</div>					 -->
+<!-- 				</div>				 -->
 				
 			</div>
 			
@@ -62,6 +77,15 @@
 			</div>
 			
 			<div class="row">
+			
+<!-- 				<div class="form-group col-sm-6"> -->
+<!-- 					<label class="control-label" for="disciplina">Disciplina</label> -->
+<!-- 					<select id="Disciplina" class="form-control" th:field="*{disciplina}" > -->
+<!-- 						<option value="">Todos as disciplinas</option> -->
+<!-- 						<option th:each="disciplina : ${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.codigo_disciplina}"></option> -->
+<!-- 					</select>								 -->
+<!-- 				</div>	 -->
+			
 				<div class="form-group col-sm-12">
 						<label class="control-label">Disciplina</label>
 						<div>
@@ -87,7 +111,9 @@
 					<tr>
 						<th class="table-cursos-col-foto"></th>
 						<th class="table-cursos-col-nome">Nome</th>
-						<th class="table-cursos-col-descricao">tipo</th>
+						<th class="table-cursos-col-tipoCurso">Tipo</th>
+						<th class="table-cursos-col-descricao">Descrição</th>
+						<th class="table-cursos-col-turno">Turno</th>
 						<th class="table-cursos-col-disciplina">Disciplina</th>
 						<th class="table-cursos-col-acoes"></th>
 					</tr>			
@@ -98,7 +124,9 @@
 							<img th:src="@{/fotos/thumbnail.{foto}(foto=${curso.fotoOuMock})}" class="img-responsive">
 						</td>
 						<td th:text="${curso.nome}">Enfermagem</td>
+						<td th:text="${curso.tipoCurso.nome}"></td>
 						<td th:text="${curso.descricao}">Curso de Enfermagem</td>
+						<td th:text="${curso.turno}"></td>
 						<td th:text="${curso.disciplina.nome}"></td>
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" title="Edital">

@@ -13,9 +13,18 @@ public class TipoCursoConverter implements Converter<String, TipoCurso> {
 			TipoCurso tipoCurso = new TipoCurso();
 			tipoCurso.setCodigo_tipoCurso(Long.valueOf(codigo_tipoCurso));
 			return tipoCurso;
-		}
-		
+		}		
 		return null;
 	}
+	
+//	@Override
+//	public TipoCurso convert(Long nome) {
+//		if (!StringUtils.isEmpty(nome)) {
+//			TipoCurso tipoCurso = new TipoCurso();
+//			tipoCurso.setNome(String.valueOf(nome));
+//			return tipoCurso;
+//		}		
+//		return null;
+//	}
 
 }
