@@ -9,6 +9,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -23,8 +24,15 @@ public class CursosImpl implements CursosQueries {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public List<Curso> filtrar(CursoFilter filtro) {
+	public List<Curso> filtrar(CursoFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Curso.class);
+		
+		int paginaAtual = pageable.getPageNumber();
+		int totalRegistrosPorPagina = pageable.getPageSize();
+		int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
+		
+		criteria.setFirstResult(primeiroRegistro);
+		criteria.setMaxResults(totalRegistrosPorPagina);
 		
 		if(filtro != null) {
 			if(!StringUtils.isEmpty(filtro.getNome())) {

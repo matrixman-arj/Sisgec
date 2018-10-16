@@ -3,6 +3,8 @@ package com.cursomarajoara.sisgec.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -59,14 +61,18 @@ public class CursosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(CursoFilter cursoFilter, BindingResult result) {
+	public ModelAndView pesquisar(CursoFilter cursoFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable) {
 		ModelAndView mv = new ModelAndView("curso/PesquisaCursos");
 		
 		mv.addObject("tiposCursos", tiposCursos.findAll());
 		mv.addObject("turnos", Turno.values());
 		mv.addObject("disciplinas", disciplinas.findAll());
-		mv.addObject("cursos", cursos.filtrar(cursoFilter));
 		
+		System.out.println(">>>> PagerNumber" + pageable.getPageNumber());
+		System.out.println(">>>> PagerNumber" + pageable.getPageSize());
+		
+		mv.addObject("cursos", cursos.filtrar(cursoFilter, pageable));
+				
 		return mv;
 	}
 	
