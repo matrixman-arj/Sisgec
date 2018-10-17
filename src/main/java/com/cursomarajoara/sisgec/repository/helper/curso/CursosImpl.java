@@ -8,7 +8,10 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -24,7 +27,7 @@ public class CursosImpl implements CursosQueries {
 	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional(readOnly = true)
-	public List<Curso> filtrar(CursoFilter filtro, Pageable pageable) {
+	public Page<Curso> filtrar(CursoFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Curso.class);
 		
 		int paginaAtual = pageable.getPageNumber();
@@ -33,6 +36,21 @@ public class CursosImpl implements CursosQueries {
 		
 		criteria.setFirstResult(primeiroRegistro);
 		criteria.setMaxResults(totalRegistrosPorPagina);
+		
+		adicionarFiltro(filtro, criteria);
+		
+		return new PageImpl<>(criteria.list(), pageable, total(filtro));
+	}
+	
+	private Long total(CursoFilter filtro) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Curso.class);
+		adicionarFiltro(filtro, criteria);
+		criteria.setProjection(Projections.rowCount());
+		return (Long)criteria.uniqueResult();
+	}
+
+
+	private void adicionarFiltro(CursoFilter filtro, Criteria criteria) {
 		
 		if(filtro != null) {
 			if(!StringUtils.isEmpty(filtro.getNome())) {
@@ -53,9 +71,8 @@ public class CursosImpl implements CursosQueries {
 			
 			
 		}
-		return criteria.list();
 	}
-	
+		
 	private boolean isDisciplinaPresente(CursoFilter filtro) {
 		return filtro.getDisciplina() != null && filtro.getDisciplina().getCodigo_disciplina() != null;
 	}

@@ -3,6 +3,7 @@ package com.cursomarajoara.sisgec.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -68,10 +69,9 @@ public class CursosController {
 		mv.addObject("turnos", Turno.values());
 		mv.addObject("disciplinas", disciplinas.findAll());
 		
-		System.out.println(">>>> PagerNumber" + pageable.getPageNumber());
-		System.out.println(">>>> PagerNumber" + pageable.getPageSize());
+		Page<Curso> pagina = cursos.filtrar(cursoFilter, pageable);
 		
-		mv.addObject("cursos", cursos.filtrar(cursoFilter, pageable));
+		mv.addObject("pagina", pagina);
 				
 		return mv;
 	}

@@ -119,7 +119,7 @@
 					</tr>			
 				</thead>
 				<tbody>
-					<tr th:each="curso : ${cursos}">
+					<tr th:each="curso : ${pagina.content}">
 						<td class="text-center">
 							<img th:src="@{/fotos/thumbnail.{foto}(foto=${curso.fotoOuMock})}" class="img-responsive">
 						</td>
@@ -138,32 +138,26 @@
 							</a>
 						</td>						
 					</tr>
-					<tr class="sisgec-pesquisa-vazia" th:if="${#lists.isEmpty(cursos)}">
+					<tr class="sisgec-pesquisa-vazia" th:if="${#lists.isEmpty(pagina.content)}">
 						<td colspan="5">Nenhum curso encontrado!</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<div class="col-sm-12 text-center">
+		<div class="col-sm-12 text-center" th:if="${not #lists.isEmpty(pagina.content)}">
 			<nav>
 				<ul class="pagination pagination-sm">
 					
 					<li class="disabled">
 						<a href="#"><span>&laquo;</span></a>
 					</li>
-					<li>
-						<a href="?page=0">1</a>
-					</li>
-					<li>
-						<a href="?page=1">2</a>
-					</li>
-					<li>
-						<a href="?page=2">3</a>
-					</li>
-					<li>
-						<a href="?page=3">4</a>
-					</li>
+					<th:block th:each="p : ${#numbers.sequence(1, pagina.totalPages)}">
+						<li>
+							<a th:href="|?page=${p - 1}">[[${p}]]</a>
+						</li>					
+					</th:block>
+					
 					<li>
 						<a href="#"><span>&raquo;</span></a>
 					</li>
