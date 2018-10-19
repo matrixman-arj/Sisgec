@@ -1,9 +1,9 @@
 package com.cursomarajoara.sisgec.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cursomarajoara.sisgec.controller.page.PageWrapper;
 import com.cursomarajoara.sisgec.enuns.Turno;
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.repository.Cursos;
@@ -62,16 +63,17 @@ public class CursosController {
 	}
 	
 	@GetMapping
-	public ModelAndView pesquisar(CursoFilter cursoFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable) {
+	public ModelAndView pesquisar(CursoFilter cursoFilter, BindingResult result
+			, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("curso/PesquisaCursos");
 		
 		mv.addObject("tiposCursos", tiposCursos.findAll());
 		mv.addObject("turnos", Turno.values());
 		mv.addObject("disciplinas", disciplinas.findAll());
 		
-		Page<Curso> pagina = cursos.filtrar(cursoFilter, pageable);
+		PageWrapper<Curso> paginaWrapper = new PageWrapper<>( cursos.filtrar(cursoFilter, pageable), httpServletRequest);
 		
-		mv.addObject("pagina", pagina);
+		mv.addObject("pagina", paginaWrapper);
 				
 		return mv;
 	}

@@ -1,7 +1,5 @@
 package com.cursomarajoara.sisgec.repository.helper.curso;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
