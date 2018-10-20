@@ -110,8 +110,25 @@
 				<thead>
 					<tr>
 						<th class="table-cursos-col-foto"></th>
-						<th class="table-cursos-col-nome">Nome <span class="dropup"><span class="caret"></span></span></th>
-						<th class="table-cursos-col-tipoCurso">Tipo</th>
+						<th class="table-cursos-col-nome">
+							<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
+								<span>Nome</span> 
+								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
+										th:if="${pagina.ordenada('nome')}" >								
+									<span class="caret"></span>
+								</span>
+							</a>
+						</th>
+						<th class="table-cursos-col-tipoCurso">
+							<a th:href="${pagina.urlOrdenada('tipoCurso')}" th:remove="${pagina.vazia} ? tag">
+								<span>Tipo</span> 
+								<span class="dropup" th:remove="${pagina.descendente('tipoCurso')} ? tag" 
+										th:if="${pagina.ordenada('tipoCurso')}">								
+									<span class="caret"></span>
+								</span>
+							</a>
+						</th>
+						
 						<th class="table-cursos-col-descricao">Descrição</th>
 						<th class="table-cursos-col-turno">Turno</th>
 						<th class="table-cursos-col-disciplina">Disciplina</th>
