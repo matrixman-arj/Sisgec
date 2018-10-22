@@ -111,22 +111,10 @@
 					<tr>
 						<th class="table-cursos-col-foto"></th>
 						<th class="table-cursos-col-nome">
-							<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
-								<span>Nome</span> 
-								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag" 
-										th:if="${pagina.ordenada('nome')}" >								
-									<span class="caret"></span>
-								</span>
-							</a>
+							<sisgec:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 						<th class="table-cursos-col-tipoCurso">
-							<a th:href="${pagina.urlOrdenada('tipoCurso')}" th:remove="${pagina.vazia} ? tag">
-								<span>Tipo</span> 
-								<span class="dropup" th:remove="${pagina.descendente('tipoCurso')} ? tag" 
-										th:if="${pagina.ordenada('tipoCurso')}">								
-									<span class="caret"></span>
-								</span>
-							</a>
+							<sisgec:order page="${pagina}" field="tipoCurso" text="Tipo"/>
 						</th>
 						
 						<th class="table-cursos-col-descricao">Descrição</th>
