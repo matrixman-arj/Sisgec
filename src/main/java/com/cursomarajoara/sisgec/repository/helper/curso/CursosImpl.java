@@ -9,6 +9,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +19,15 @@ import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.repository.filter.CursoFilter;
+import com.cursomarajoara.sisgec.repository.paginacao.PaginacaoUtil;
 
 public class CursosImpl implements CursosQueries {
 	
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@Autowired
+	private PaginacaoUtil paginacaoUtil;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -30,19 +35,7 @@ public class CursosImpl implements CursosQueries {
 	public Page<Curso> filtrar(CursoFilter filtro, Pageable pageable) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Curso.class);
 		
-		int paginaAtual = pageable.getPageNumber();
-		int totalRegistrosPorPagina = pageable.getPageSize();
-		int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
-		
-		criteria.setFirstResult(primeiroRegistro);
-		criteria.setMaxResults(totalRegistrosPorPagina);
-		
-		Sort sort = pageable.getSort();
-		if (sort != null ) {
-			Sort.Order order = sort.iterator().next();
-			String property = order.getProperty();
-			criteria.addOrder(order.isAscending()? Order.asc(property) : Order.desc(property));
-		}
+		paginacaoUtil.preparar(criteria, pageable);
 		
 		adicionarFiltro(filtro, criteria);
 		
