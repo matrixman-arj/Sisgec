@@ -2,14 +2,16 @@ package com.cursomarajoara.sisgec.model;
 
 import java.util.Date;
 
+import com.cursomarajoara.sisgec.enuns.TipoPessoa;
+
 public class Aluno {
 	
 	private Long codigo;
-	private String nome;
+	private String nome;	
 	private String nomePai;
 	private String nomeMae;
 	private Date dataNascimento;
-	private String tipoPessoa;
+	private TipoPessoa tipoPessoa;
 	private String docReceita;
 	private String telefone;
 	private String email;
@@ -54,12 +56,12 @@ public class Aluno {
 	}
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
-	}
+	}	
 	
-	public String getTipoPessoa() {
+	public TipoPessoa getTipoPessoa() {
 		return tipoPessoa;
 	}
-	public void setTipoPessoa(String tipoPessoa) {
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
 		this.tipoPessoa = tipoPessoa;
 	}
 	
