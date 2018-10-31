@@ -7,22 +7,27 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.model.Aluno;
 
 @Controller
+@RequestMapping("/alunos")
 public class AlunosController {
 	
-	@RequestMapping("/alunos/novo")
-	public String novo(Aluno aluno) {		
-		return "aluno/CadastroAluno";
+	@RequestMapping("novo")
+	public ModelAndView novo() {
+		ModelAndView mv = new ModelAndView("aluno/CadastroAluno");
+		mv.addObject("tiposPessoa", TipoPessoa.values());
+		return mv;
 	}
 	
 	@RequestMapping(value = "/alunos/novo", method = RequestMethod.POST )
 	public String cadastrar(@Valid Aluno aluno, BindingResult result, Model model, RedirectAttributes attributes) {
 		if(result.hasErrors()) {					
-			return novo(aluno);
+			return null;
 		}
 		
 		//Salvar no Banco de dados.....		

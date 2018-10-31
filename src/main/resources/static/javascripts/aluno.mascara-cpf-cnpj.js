@@ -1,9 +1,11 @@
-var Sisgec = sisgec || {};
+var Sisgec = Sisgec || {};
 
 Sisgec.MascaraCpfCnpj = (function() {
 	
 	function MascaraCpfCnpj() {
-		this.radioTipoPessoa = $('.js-radio-tipo-pessoa');
+		this.radioTipoPessoa = $('.js-radio-tipo-pessoa');		
+		this.labelCpfCnpj = $('[for=cpfOuCnpj]');
+		this.inputCpfCnpj = $('#cpfOuCnpj');
 		
 	}
 	
@@ -13,7 +15,11 @@ Sisgec.MascaraCpfCnpj = (function() {
 	
 	function onTipoPessoaAlterado(evento){
 		var tipoPessoaSelecionada = $(evento.currentTarget);
-		console.log('documento', tipoPessoaSelecionada.data('documento'));
+		this.labelCpfCnpj.text(tipoPessoaSelecionada.data('documento'));
+		this.inputCpfCnpj.mask(tipoPessoaSelecionada.data('mascara'));
+		this.inputCpfCnpj.val('');
+		this.inputCpfCnpj.removeAttr('disabled');
+		
 	}
 	
 	return MascaraCpfCnpj;

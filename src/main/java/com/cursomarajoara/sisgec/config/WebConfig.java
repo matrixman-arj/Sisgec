@@ -30,6 +30,7 @@ import com.cursomarajoara.sisgec.controller.CursosController;
 import com.cursomarajoara.sisgec.converter.DisciplinaCursoConverter;
 import com.cursomarajoara.sisgec.converter.TipoCursoConverter;
 import com.cursomarajoara.sisgec.thymeleaf.SisgecDialect;
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
@@ -63,6 +64,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 		engine.addDialect(new LayoutDialect());
 		engine.addDialect(new SisgecDialect());
+		engine.addDialect(new DataAttributeDialect());
 		return engine;
 	}
 	
