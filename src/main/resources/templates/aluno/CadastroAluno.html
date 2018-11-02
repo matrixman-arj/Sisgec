@@ -45,10 +45,9 @@
 			<div class="row">
 			
 				<div class="form-group  col-sm-4">
-					<label>Tipo aluno</label> 
-					
+					<label>Tipo aluno</label>					
 					<div>
-						<th:block th:each="tipoPessoa : ${tipoPessoa}">
+						<th:block th:each="tipoPessoa : ${tiposPessoa}">
 							<div class="radio  radio-inline">
 								<input type="radio" th:id="|id_${tipoPessoa}|" class="js-radio-tipo-pessoa" 
 									name="tipoPessoa" data:documento="${tipoPessoa.documento}" data:mascara="${tipoPessoa.mascara}"> 
@@ -61,8 +60,7 @@
 				<div class="form-group  col-sm-8 sisgec-required" >
 					<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label>
 					<input type="text" class="form-control" id="cpfOuCnpj" disabled/>
-				</div>
-				
+				</div>				
 			</div>
 				
 			<div class="row">

@@ -15,6 +15,7 @@ Sisgec.MascaraCpfCnpj = (function() {
 	
 	function onTipoPessoaAlterado(evento){
 		var tipoPessoaSelecionada = $(evento.currentTarget);
+		
 		this.labelCpfCnpj.text(tipoPessoaSelecionada.data('documento'));
 		this.inputCpfCnpj.mask(tipoPessoaSelecionada.data('mascara'));
 		this.inputCpfCnpj.val('');
@@ -28,6 +29,5 @@ Sisgec.MascaraCpfCnpj = (function() {
 
 $(function() {
 	var mascaraCpfCnpj = new Sisgec.MascaraCpfCnpj();
-	mascaraCpfCnpj.iniciar();
-	
+	mascaraCpfCnpj.iniciar();	
 });
