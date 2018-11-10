@@ -43,10 +43,28 @@ Sisgec.MaskPhoneNumber = (function(){
 	
 }());
 
+Sisgec.MaskCepNumber = (function() {
+	
+	function MaskCepNumber() {
+		this.inputCepNumber = $('.js-cep-number');
+		
+	}
+	
+	MaskCepNumber.prototype.enable = function() {
+		this.inputCepNumber.mask('00.000-000');
+	}
+	
+	return MaskCepNumber;
+	
+}());
+
 $(function() {
 	var maskMoney = new Sisgec.MaskMoney();
 	maskMoney.enable();
 	
 	var maskPhoneNumber = new Sisgec.MaskPhoneNumber();
 	maskPhoneNumber.enable();
+	
+	var maskCepNumber = new Sisgec.MaskCepNumber();
+	maskCepNumber.enable();
 }); 
