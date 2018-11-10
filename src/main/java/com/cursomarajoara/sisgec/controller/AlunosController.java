@@ -2,6 +2,7 @@ package com.cursomarajoara.sisgec.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,15 +13,20 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.model.Aluno;
+import com.cursomarajoara.sisgec.repository.Estados;
 
 @Controller
 @RequestMapping("/alunos")
 public class AlunosController {
 	
+	@Autowired
+	private Estados estados;
+	
 	@RequestMapping("novo")
 	public ModelAndView novo() {
 		ModelAndView mv = new ModelAndView("aluno/CadastroAluno");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
+		mv.addObject("estados", estados.findAll());
 		return mv;
 	}
 	
