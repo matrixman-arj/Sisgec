@@ -125,7 +125,7 @@
 				
 				<div class="form-group  col-sm-4 sisgec-required">
 					<label  for="cidade" class="control-label">Cidade</label>
-					<select id="cidade" class="form-control">
+					<select id="cidade" class="form-control" data:url="@{/cidades}">
 						<option value="">Selecione a cidade</option>
 					</select>
 				</div>
@@ -146,5 +146,6 @@
 </body>
 	<th:block layout:fragment="javascript-extra">
 		<script th:src="@{/javascripts/aluno.mascara-cpf-cnpj.js}"></script>
+		<script th:src="@{/javascripts/aluno.combo-estado-cidade.js}"></script>
 	</th:block>
 </html>
