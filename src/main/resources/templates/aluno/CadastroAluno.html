@@ -125,9 +125,16 @@
 				
 				<div class="form-group  col-sm-4 sisgec-required">
 					<label  for="cidade" class="control-label">Cidade</label>
-					<select id="cidade" class="form-control" data:url="@{/cidades}">
-						<option value="">Selecione a cidade</option>
-					</select>
+					<div class="sisgec-field-action">
+						<select id="cidade" class="form-control" data:url="@{/cidades}">
+							
+						</select>
+						
+						<div class="sisgec-field-action__icon js-img-loading" style="display: none" >
+							<img th:src="@{/images/mini-loading.gif}"/>
+						</div>
+						
+					</div>
 				</div>
 			</div>			
 			
