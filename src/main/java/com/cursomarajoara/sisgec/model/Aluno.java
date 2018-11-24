@@ -1,27 +1,51 @@
 package com.cursomarajoara.sisgec.model;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 
-public class Aluno {
+@Entity
+@Table(name = "aluno")
+public class Aluno implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
-	private String nome;	
-	private String nomePai;
-	private String nomeMae;
-	private Date dataNascimento;
-	private TipoPessoa tipoPessoa;
-	private String docReceita;
-	private String telefone;
-	private String email;
-	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String cep;
-	private String estado;
-	private String cidade;
 	
+	private String nome;
+	
+	private String nomePai;
+	
+	private String nomeMae;
+	
+	private Date dataNascimento;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_pessoa")
+	private TipoPessoa tipoPessoa;
+	
+	@Column(name = "cpf_cnpj")
+	private String docReceita;
+	
+	private String telefone;
+	
+	private String email;
+	
+	@Embedded
+	private Endereco endereco;	
 	
 	public Long getCodigo() {
 		return codigo;
@@ -86,46 +110,29 @@ public class Aluno {
 		this.email = email;
 	}
 	
-	public String getLogradouro() {
-		return logradouro;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
 	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	
-	public String getNumero() {
-		return numero;
-	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-	
-	public String getComplemento() {
-		return complemento;
-	}
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-	
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
 	}
 	
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
 	
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}	
-
 }
