@@ -18,7 +18,7 @@ public class Endereco implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "codigo_cidade")
-	private String cidade;
+	private Cidade cidade;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -52,11 +52,11 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}	
 

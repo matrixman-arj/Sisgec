@@ -25,6 +25,8 @@ public class Aluno implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	private String matricula;
+	
 	private String nome;
 	
 	private String nomePai;
@@ -53,7 +55,13 @@ public class Aluno implements Serializable{
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	
+		
+	public String getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
 	public String getNome() {
 		return nome;
 	}

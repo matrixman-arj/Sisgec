@@ -23,7 +23,7 @@ public class AlunosController {
 	private Estados estados;
 	
 	@RequestMapping("novo")
-	public ModelAndView novo() {
+	public ModelAndView novo(Aluno aluno) {
 		ModelAndView mv = new ModelAndView("aluno/CadastroAluno");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
 		mv.addObject("estados", estados.findAll());
