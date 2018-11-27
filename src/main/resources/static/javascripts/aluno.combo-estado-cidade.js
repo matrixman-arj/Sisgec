@@ -53,7 +53,7 @@ Sisgec.ComboCidade = (function() {
 	function onBuscarCidadesFinalizado(cidades){
 		var options = [];
 		cidades.forEach(function(cidade){
-			options.push('<option value"' + cidade.codigo + '">' + cidade.nome + '</option>' )
+			options.push('<option value="' + cidade.codigo + '">' + cidade.nome + '</option>' )
 			
 		});
 		
