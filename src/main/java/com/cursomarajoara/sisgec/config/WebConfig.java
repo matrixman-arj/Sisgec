@@ -27,6 +27,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.cursomarajoara.sisgec.controller.CursosController;
+import com.cursomarajoara.sisgec.converter.CidadeConverter;
 import com.cursomarajoara.sisgec.converter.DisciplinaCursoConverter;
 import com.cursomarajoara.sisgec.converter.TipoCursoConverter;
 import com.cursomarajoara.sisgec.thymeleaf.SisgecDialect;
@@ -87,6 +88,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		conversionService.addConverter(new TipoCursoConverter());
 		conversionService.addConverter(new DisciplinaCursoConverter());
+		conversionService.addConverter(new CidadeConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);

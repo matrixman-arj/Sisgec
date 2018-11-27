@@ -12,11 +12,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
 
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
+import com.cursomarajoara.sisgec.validation.AlunoGroupSequenceProvider;
+import com.cursomarajoara.sisgec.validation.group.CnpjGroup;
+import com.cursomarajoara.sisgec.validation.group.CpfGroup;
 
 @Entity
 @Table(name = "aluno")
+@GroupSequenceProvider(AlunoGroupSequenceProvider.class)
 public class Aluno implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -25,9 +36,12 @@ public class Aluno implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	
+	@NotBlank(message = " Matricula é obrigatória")
 	private String matricula;
 	
+	@NotBlank(message = " Nome é obrigatório")
 	private String nome;
+	
 	
 	private String nomePai;
 	
@@ -35,15 +49,20 @@ public class Aluno implements Serializable{
 	
 	private Date dataNascimento;
 	
+	@NotNull(message = " Tipo pessoa é obrigatório")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_pessoa")
 	private TipoPessoa tipoPessoa;
 	
+	@NotBlank(message = " CPF/CNPJ é obrigatório")
+	@CPF(groups = CpfGroup.class)
+	@CNPJ(groups = CnpjGroup.class)
 	@Column(name = "cpf_cnpj")
 	private String docReceita;
 	
 	private String telefone;
 	
+	@Email(message = " e-mail inválido")
 	private String email;
 	
 	@Embedded
@@ -116,6 +135,13 @@ public class Aluno implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}	
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	@Override

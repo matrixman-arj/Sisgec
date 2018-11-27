@@ -4,10 +4,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +21,7 @@ public class AlunosController {
 	@Autowired
 	private Estados estados;
 	
-	@RequestMapping("novo")
+	@RequestMapping("/novo")
 	public ModelAndView novo(Aluno aluno) {
 		ModelAndView mv = new ModelAndView("aluno/CadastroAluno");
 		mv.addObject("tiposPessoa", TipoPessoa.values());
@@ -30,20 +29,12 @@ public class AlunosController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/alunos/novo", method = RequestMethod.POST )
-	public String cadastrar(@Valid Aluno aluno, BindingResult result, Model model, RedirectAttributes attributes) {
-		if(result.hasErrors()) {					
-			return null;
+	@PostMapping("/novo")
+	public ModelAndView salvar(@Valid Aluno aluno, BindingResult result, RedirectAttributes attributes) {
+		if (result.hasErrors()) {
+			return novo(aluno);
 		}
-		
-		//Salvar no Banco de dados.....		
-		attributes.addFlashAttribute("mensagem", "Aluno salvo com sucesso! ");
-		System.out.println(">>>>>>>>> Nome: " + aluno.getNome());
-		return "redirect:/alunos/novo";
-	}
-	
-	@RequestMapping("/alunos/cadastro")
-	public String cadastro() {
-		return "aluno/cadastro-produto";
+		attributes.addFlashAttribute("mensagem", "Aluno salvo com sucesso!");
+		return new ModelAndView("redirect:/alunos/novo");
 	}
 }
