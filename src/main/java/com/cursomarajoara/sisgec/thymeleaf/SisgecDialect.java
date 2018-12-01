@@ -10,6 +10,7 @@ import org.thymeleaf.standard.StandardDialect;
 import com.cursomarajoara.sisgec.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
 import com.cursomarajoara.sisgec.thymeleaf.processor.MessageElementTagProcessor;
 import com.cursomarajoara.sisgec.thymeleaf.processor.OrderElementTagProcessor;
+import com.cursomarajoara.sisgec.thymeleaf.processor.PaginationElementTagProcessor;
 
 public class SisgecDialect extends AbstractProcessorDialect {
 
@@ -23,6 +24,7 @@ public class SisgecDialect extends AbstractProcessorDialect {
 		processadores.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
 		processadores.add(new MessageElementTagProcessor(dialectPrefix));
 		processadores.add(new OrderElementTagProcessor(dialectPrefix));
+		processadores.add(new PaginationElementTagProcessor(dialectPrefix));
 		return processadores;
 	}
 

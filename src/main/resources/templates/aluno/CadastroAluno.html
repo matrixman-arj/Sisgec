@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:data="http://www.thymeleaf.org/extras/data"	  
+	  xmlns:th="http://www.thymeleaf.org"	  
+	  xmlns:data="http://www.thymeleaf.org/extras/data"
+	  xmlns:sisgec="http://sisgec.cursomarajoara.com"	  
 	  layout:decorate="~{layout/layoutPadrao}">
 <head>
 	<title>Cadastro de aluno</title>
@@ -117,17 +118,19 @@
 					<input type="text" class="form-control js-cep-number" id="cep" th:field="*{endereco.cep}"/>
 				</div>
 				
-				<div class="form-group  col-sm-4 sisgec-required">
-					<label for="estado" class="control-label">Estado</label>
-					<select id="estado" class="form-control">
+				<div class="form-group  col-sm-4">
+					<label for="estado">Estado</label>
+					<select id="estado" class="form-control" th:field="*{endereco.estado}">
 	                    <option value="">Selecione o estado</option>
-	                    <option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">Rio de Janeiro</option>
+	                    <option th:each="estado : ${estados}" th:value="${estado.codigo}" 
+	                    		th:text="${estado.nome}">Rio de Janeiro</option>
 	                </select>
 				</div>
 				
 				<div class="form-group  col-sm-4 sisgec-required">
 					<label  for="cidade" class="control-label">Cidade</label>
 					<div class="sisgec-field-action">
+						<input type="hidden" id="inputHiddenCidadeSelecionada" th:value="*{endereco.cidade}!= null ? *{endereco.cidade.codigo}"/>
 						<select id="cidade" class="form-control" data:url="@{/cidades}" th:field="*{endereco.cidade}">
 							
 						</select>
