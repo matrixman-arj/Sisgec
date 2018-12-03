@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -42,11 +44,13 @@ public class Aluno implements Serializable{
 	@NotBlank(message = " Nome é obrigatório")
 	private String nome;
 	
-	
+	@Column(name = "nome_pai")
 	private String nomePai;
 	
+	@Column(name = "nome_mae")
 	private String nomeMae;
 	
+	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 	
 	@NotNull(message = " Tipo pessoa é obrigatório")
@@ -66,7 +70,12 @@ public class Aluno implements Serializable{
 	private String email;
 	
 	@Embedded
-	private Endereco endereco;	
+	private Endereco endereco;
+	
+	@PrePersist @PreUpdate
+	private void prePersistPreUpdate() {
+		this.docReceita = this.docReceita.replaceAll("\\.|-|/", "");
+	}
 	
 	public Long getCodigo() {
 		return codigo;

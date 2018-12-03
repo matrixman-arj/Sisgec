@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.model.Aluno;
 import com.cursomarajoara.sisgec.repository.Estados;
+import com.cursomarajoara.sisgec.service.CadastroAlunoService;
 
 @Controller
 @RequestMapping("/alunos")
@@ -20,6 +21,9 @@ public class AlunosController {
 	
 	@Autowired
 	private Estados estados;
+	
+	@Autowired
+	private CadastroAlunoService cadastroAlunoService;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Aluno aluno) {
@@ -34,6 +38,8 @@ public class AlunosController {
 		if (result.hasErrors()) {
 			return novo(aluno);
 		}
+		
+		cadastroAlunoService.salvar(aluno);
 		attributes.addFlashAttribute("mensagem", "Aluno salvo com sucesso!");
 		return new ModelAndView("redirect:/alunos/novo");
 	}

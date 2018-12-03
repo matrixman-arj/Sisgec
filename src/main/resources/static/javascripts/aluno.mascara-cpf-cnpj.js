@@ -4,8 +4,8 @@ Sisgec.MascaraCpfCnpj = (function() {
 	
 	function MascaraCpfCnpj() {
 		this.radioTipoPessoa = $('.js-radio-tipo-pessoa');		
-		this.labelCpfCnpj = $('[for=cpfOuCnpj]');
-		this.inputCpfCnpj = $('#cpfOuCnpj');
+		this.labelCpfCnpj = $('[for=docReceita]');
+		this.inputCpfCnpj = $('#docReceita');
 		
 	}
 	

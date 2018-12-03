@@ -6,7 +6,8 @@ import com.cursomarajoara.sisgec.validation.group.CnpjGroup;
 public enum TipoPessoa {
 	
 	FISICA("Física", "CPF", "000.000.000-00", CpfGroup.class),
-	JURIDICA("Jurídica", "CNPJ", "00.000.000/000-00", CnpjGroup.class);	
+	JURIDICA("Jurídica", "CNPJ", "00.000.000/0000-00", CnpjGroup.class);
+	
 	
 	private String descricao;
 	private String documento;
@@ -34,9 +35,6 @@ public enum TipoPessoa {
 
 	public Class<?> getGrupo() {
 		return grupo;
-	}
-	
-	
-	
+	}	
 		
 }
