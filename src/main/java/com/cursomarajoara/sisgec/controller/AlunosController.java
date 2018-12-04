@@ -14,6 +14,7 @@ import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.model.Aluno;
 import com.cursomarajoara.sisgec.repository.Estados;
 import com.cursomarajoara.sisgec.service.CadastroAlunoService;
+import com.cursomarajoara.sisgec.service.exception.CpfCnpjAlunoJaCadastradoException;
 
 @Controller
 @RequestMapping("/alunos")
@@ -39,8 +40,14 @@ public class AlunosController {
 			return novo(aluno);
 		}
 		
-		cadastroAlunoService.salvar(aluno);
+		try {
+			cadastroAlunoService.salvar(aluno);
+		} catch (CpfCnpjAlunoJaCadastradoException e) {
+			result.rejectValue("docReceita", e.getMessage(), e.getMessage());
+			return novo(aluno);
+		}
 		attributes.addFlashAttribute("mensagem", "Aluno salvo com sucesso!");
 		return new ModelAndView("redirect:/alunos/novo");
+		
 	}
 }

@@ -74,7 +74,7 @@ public class Aluno implements Serializable{
 	
 	@PrePersist @PreUpdate
 	private void prePersistPreUpdate() {
-		this.docReceita = this.docReceita.replaceAll("\\.|-|/", "");
+		this.docReceita = TipoPessoa.removerFormatacao(this.docReceita);
 	}
 	
 	public Long getCodigo() {
@@ -151,6 +151,10 @@ public class Aluno implements Serializable{
 	}
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	
+	public String getCpfOuCnpjSemFormatacao() {
+		return TipoPessoa.removerFormatacao(this.docReceita);
 	}
 	
 	@Override
