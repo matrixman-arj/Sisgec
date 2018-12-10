@@ -1,18 +1,25 @@
 package com.cursomarajoara.sisgec.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.cursomarajoara.sisgec.controller.page.PageWrapper;
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.model.Aluno;
+import com.cursomarajoara.sisgec.repository.Alunos;
 import com.cursomarajoara.sisgec.repository.Estados;
+import com.cursomarajoara.sisgec.repository.filter.AlunoFilter;
 import com.cursomarajoara.sisgec.service.CadastroAlunoService;
 import com.cursomarajoara.sisgec.service.exception.CpfCnpjAlunoJaCadastradoException;
 
@@ -25,6 +32,9 @@ public class AlunosController {
 	
 	@Autowired
 	private CadastroAlunoService cadastroAlunoService;
+			
+	@Autowired
+	private Alunos alunos;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Aluno aluno) {
@@ -49,5 +59,19 @@ public class AlunosController {
 		attributes.addFlashAttribute("mensagem", "Aluno salvo com sucesso!");
 		return new ModelAndView("redirect:/alunos/novo");
 		
+	}
+	
+	@GetMapping
+	public ModelAndView pesquisar(AlunoFilter alunoFilter, BindingResult result
+			, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest httpServletRequest) {
+		ModelAndView mv = new ModelAndView("aluno/PesquisaAlunos");
+		
+		mv.addObject("tiposPessoa", TipoPessoa.values());		
+		
+		PageWrapper<Aluno> paginaWrapper = new PageWrapper<>( alunos.filtrar(alunoFilter, pageable), httpServletRequest);
+		
+		mv.addObject("pagina", paginaWrapper);
+				
+		return mv;
 	}
 }

@@ -128,3 +128,19 @@
 	text-align: center;
 	color: red;
 }
+
+.table-alunos-col-nome {
+	width: 480px;
+}
+
+.table-alunos-col-tipoPessoa {
+	width: 240px;
+}
+
+.table-alunos-col-docReceita {
+	width: 240px;
+}
+
+.table-alunos-col-telefone {
+	width: 120px;
+}
