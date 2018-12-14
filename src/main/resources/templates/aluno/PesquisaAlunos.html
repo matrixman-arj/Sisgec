@@ -3,7 +3,8 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	
 	  layout:decorate="~{layout/layoutPadrao}"
-	  xmlns:sisgec="http://sisgec.marajoara.com">
+	  xmlns:sisgec="http://sisgec.marajoara.com"
+	  xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <head>
 	<title>Pesquisa de alunos</title>	
@@ -57,7 +58,9 @@
 						<th class="table-alunos-col-nome">
 							<sisgec:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
-						<th class="table-alunos-col-tipoPessoa">Tipo Pessoa</th>
+						<th class="table-alunos-col-tipoPessoa">
+							<sisgec:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa"/>
+						</th>
 						
 						<th class="table-alunos-col-docReceita">CPF/CNPJ</th>
 						<th class="table-alunos-col-telefone">Telefone</th>						
@@ -70,11 +73,11 @@
 <!-- 							<img th:src="@{/fotos/thumbnail.{foto}(foto=${aluno.fotoOuMock})}" class="img-responsive"> -->
 <!-- 						</td> -->
 						<td th:text="${aluno.nome}">Vanilton</td>
-						<td th:text="${aluno.tipoPessoa}">FISICA</td>
+						<td th:text="${aluno.tipoPessoa.descricao}">FISICA</td>
 						<td th:text="${aluno.docReceita}">011.123.321-14</td>
 						<td th:text="${aluno.telefone}"></td>						
 						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Edital">
+							<a class="btn btn-link btn-xs" title="Editar">
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							
@@ -88,28 +91,8 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>
-		
-		<div class="col-sm-12 text-center" th:if="${not pagina.vazia}">
-			<nav>
-				<ul class="pagination pagination-sm" th:with="paginaAtual=${pagina.atual}">
-					
-					<li th:class="${pagina.primeira} ? disabled">
-						<a th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? all"><span>&laquo;</span></a>
-					</li>
-					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p -1}">
-						<li th:class="${paginaAtual == numeroPagina} ? active">
-							<a th:href="${pagina.urlParaPagina(numeroPagina)}|">[[${p}]]</a>
-						</li>					
-					</th:block>
-					
-					<li th:class="${pagina.ultima} ? disabled">
-						<a th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? all"><span>&raquo;</span></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-		
+		</div>		
+		<sisgec:pagination page="${pagina}"/>
 	</div>
 	
 </section>

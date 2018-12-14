@@ -56,7 +56,7 @@ public class AlunosImpl implements AlunosQueries {
 			}			
 			
 			if(isCpfOuCnpjPresente(filtro)) {
-				criteria.add(Restrictions.eq("cpfOuCnpj", filtro.getDocReceita()));
+				criteria.add(Restrictions.eq("docReceita", filtro.getDocReceita()));
 			}			
 			
 		}
