@@ -12,7 +12,6 @@
 
 <body>	
 <section layout:fragment="conteudo">
-
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
@@ -32,8 +31,7 @@
 		</div>
 	</div>
 	
-	<div class="container-fluid">				      
-	
+	<div class="container-fluid">	
 		<form method="GET" th:object="${alunoFilter}">		
 			<div class="row">
 				<div class="form-group col-sm-8">
@@ -47,9 +45,9 @@
 				</div>
 			</div>			
 			
-			<button type="submit" class="btn btn-primary">Pesquisar</button>
-		
+			<button type="submit" class="btn btn-primary">Pesquisar</button>		
 		</form>
+		
 		<div class="table-responsive sisgec-tabela-simples">
 			<table class="table table-hover">
 				<thead>
@@ -59,11 +57,12 @@
 							<sisgec:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 						<th class="table-alunos-col-tipoPessoa">
-							<sisgec:order page="${pagina}" field="tipoPessoa" text="Tipo Pessoa"/>
+							<field="tipoPessoa" text="Tipo Pessoa"/>
 						</th>
 						
 						<th class="table-alunos-col-docReceita">CPF/CNPJ</th>
-						<th class="table-alunos-col-telefone">Telefone</th>						
+						<th class="table-alunos-col-telefone">Telefone</th>
+						<th class="table-alunos-col-cidade-estado">Cidade/Estado</th>							
 						<th class="table-cursos-col-acoes"></th>
 					</tr>			
 				</thead>
@@ -73,9 +72,10 @@
 <!-- 							<img th:src="@{/fotos/thumbnail.{foto}(foto=${aluno.fotoOuMock})}" class="img-responsive"> -->
 <!-- 						</td> -->
 						<td th:text="${aluno.nome}">Vanilton</td>
-						<td th:text="${aluno.tipoPessoa.descricao}">FISICA</td>
-						<td th:text="${aluno.docReceita}">011.123.321-14</td>
-						<td th:text="${aluno.telefone}"></td>						
+						<td class="text-center" th:text="${aluno.tipoPessoa.descricao}">FISICA</td>
+						<td class="text-right" th:text="${aluno.docReceita}">011.123.321-14</td>
+						<td class="text-right" th:text="${aluno.telefone}"></td>
+						<td class="text-right" th:text="${aluno.endereco.nomeCidadeSiglaEstado}"></td>												
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" title="Editar">
 								<i class="glyphicon glyphicon-pencil"></i>
@@ -91,10 +91,11 @@
 					</tr>
 				</tbody>
 			</table>
-		</div>		
+		</div>	
+			
 		<sisgec:pagination page="${pagina}"/>
-	</div>
-	
+		
+	</div>	
 </section>
 </body>
 </html>

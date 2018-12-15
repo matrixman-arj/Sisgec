@@ -9,7 +9,7 @@ public enum TipoPessoa {
 		@Override
 		public String formatar(String docReceita) {
 			
-			return docReceita.replaceAll("(\\d{3})(\\\\d{3})(\\\\d{3})", "$1.$2.$3-");
+			return docReceita.replaceAll("(\\d{3})(\\d{3})(\\d{3})", "$1.$2.$3-");
 		}
 	},
 	

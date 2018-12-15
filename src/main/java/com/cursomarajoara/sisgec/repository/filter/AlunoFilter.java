@@ -4,10 +4,8 @@ import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 
 public class AlunoFilter {
 	
-	private String nome;
-	private TipoPessoa tipoPessoa;
+	private String nome;	
 	private String docReceita;
-	private String telefone;
 	
 	public String getNome() {
 		return nome;
@@ -15,14 +13,7 @@ public class AlunoFilter {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public TipoPessoa getTipoPessoa() {
-		return tipoPessoa;
-	}
-	public void setTipoPessoa(TipoPessoa tipoPessoa) {
-		this.tipoPessoa = tipoPessoa;
-	}	
-	
+			
 	public String getDocReceita() {
 		return docReceita;
 	}
@@ -30,11 +21,8 @@ public class AlunoFilter {
 		this.docReceita = docReceita;
 	}
 	
-	public String getTelefone() {
-		return telefone;
+	public Object getCpfOuCnpjSemFormatacao() {
+		return TipoPessoa.removerFormatacao(this.docReceita);
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}	
 			
 }

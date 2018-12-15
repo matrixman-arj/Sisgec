@@ -144,3 +144,8 @@
 .table-alunos-col-telefone {
 	width: 120px;
 }
+
+.table-alunos-col-cidade-estado {
+	width: 140px;
+	text-align: right;
+}
