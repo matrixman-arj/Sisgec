@@ -92,6 +92,15 @@
 ###################
 */
 
+/* Colunas comuns */
+.table-col-acoes {
+	width: 80px;
+}
+
+.table-vazia {
+	color: red;
+}
+
 /* Colunas - Pesquisa de Cursos */
 .table-cursos-col-foto {
 	min-width: 50px;
@@ -149,3 +158,32 @@
 	width: 140px;
 	text-align: right;
 }
+
+
+/* Tabela Simples */
+.sisgec-tabela-simples {
+	margin-top: 15px;
+}
+
+.sisgec-tabela-simples table tr th {
+	border-bottom-width: 1px;
+}
+
+.sisgec-tabela-simples table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    padding: 10px;
+    vertical-align: middle;
+}
+
+/* Colunas - Pesquisa de cidades */
+.table-cidades-col-nome {
+	
+}
+
+.table-cidades-col-estado {
+	width: 140px;
+	text-align: right;
+}
+
+
