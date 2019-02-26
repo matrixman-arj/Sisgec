@@ -28,24 +28,24 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank(message = " Nome é obrigatório")
 	private String nome;
 
-	@NotBlank(message = "E-mail é obrigatório")
-	@Email(message = "E-mail inválido")
+	@NotBlank(message = " E-mail é obrigatório")
+	@Email(message = " E-mail inválido")
 	private String email;
 
 	private String senha;
 
 	private Boolean ativo;
 
-	@NotNull(message = "Selecione pelo menos um grupo")
+	@NotNull(message = " Selecione pelo menos um grupo")
 	@ManyToMany
 	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "codigo_usuario")
 				, inverseJoinColumns = @JoinColumn(name = "codigo_grupo"))	
 	private List<Grupo> grupos;
 
-	@NotNull(message = "Data de nascimento é obrigatório")
+	@NotNull(message = " Data de nascimento é obrigatório")
 	@Column(name = "data_nascimento")
 	private LocalDate dataNascimento;
 
