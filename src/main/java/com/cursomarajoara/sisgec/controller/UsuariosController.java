@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cursomarajoara.sisgec.model.Usuario;
+import com.cursomarajoara.sisgec.repository.Grupos;
 import com.cursomarajoara.sisgec.repository.Usuarios;
 import com.cursomarajoara.sisgec.service.CadastroUsuarioService;
 import com.cursomarajoara.sisgec.service.exception.EmailUsuarioJaCadastradoException;
@@ -21,6 +22,9 @@ public class UsuariosController {
 	
 	@Autowired
 	private CadastroUsuarioService cadastroUsuarioService;
+	
+	@Autowired
+	private Grupos grupos;
 			
 	@Autowired
 	private Usuarios usuarios;
@@ -28,7 +32,8 @@ public class UsuariosController {
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Usuario usuario) {
-		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");		
+		ModelAndView mv = new ModelAndView("usuario/CadastroUsuario");
+		mv.addObject("grupos", grupos.findAll());
 		return mv;
 	}
 		

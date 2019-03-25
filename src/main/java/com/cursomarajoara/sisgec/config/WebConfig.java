@@ -37,6 +37,7 @@ import com.cursomarajoara.sisgec.controller.CursosController;
 import com.cursomarajoara.sisgec.converter.CidadeConverter;
 import com.cursomarajoara.sisgec.converter.DisciplinaCursoConverter;
 import com.cursomarajoara.sisgec.converter.EstadoConverter;
+import com.cursomarajoara.sisgec.converter.GrupoConverter;
 import com.cursomarajoara.sisgec.converter.TipoCursoConverter;
 import com.cursomarajoara.sisgec.thymeleaf.SisgecDialect;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
@@ -99,6 +100,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		conversionService.addConverter(new DisciplinaCursoConverter());
 		conversionService.addConverter(new CidadeConverter());
 		conversionService.addConverter(new EstadoConverter());
+		conversionService.addConverter(new GrupoConverter());
 		
 		NumberStyleFormatter bigDecimalFormatter = new NumberStyleFormatter("#,##0.00");
 		conversionService.addFormatterForFieldType(BigDecimal.class, bigDecimalFormatter);
