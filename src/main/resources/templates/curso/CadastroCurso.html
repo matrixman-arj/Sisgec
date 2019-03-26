@@ -107,17 +107,17 @@
 <!-- 					</div>					 -->
 <!-- 				</div> -->
 				
-				<div class="col-sm-12  form-group sisgec-required" sisgec:classforerror="disciplina">
-					<label for="disciplina" class="control-label">Disciplina</label>
+				<div class="col-sm-12  form-group sisgec-required" sisgec:classforerror="disciplinas">
+					<label class="control-label">Disciplinas</label>
 					<div>
 						<th:block th:each="disciplina : ${disciplinas}">
-							<div class="radio radio-inline">
-								<input th:id="|id_${disciplina}|" th:type="radio" th:value="${disciplina.codigo_disciplina}" th:field="*{disciplina}">
-								<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
+							<div class="checkbox  checkbox-inline"> 
+								<input type="checkbox" th:value="${disciplina.codigo_disciplina}" th:field="*{disciplinas}">
+								<label th:for="${#ids.prev('disciplinas')}" th:text="${disciplina.nome}" class="control-label">Farma</label>
 							</div>
 						</th:block>																
 					</div>					
-				</div>
+				</div>				
 			</div>
 				
 			<div class="row">

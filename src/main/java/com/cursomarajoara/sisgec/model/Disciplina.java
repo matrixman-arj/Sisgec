@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,17 +27,27 @@ public class Disciplina implements Serializable {
 	
 	private String descricao;
 	
-	@OneToMany(mappedBy = "disciplina")
-	private List<Curso> cursos;	
+//	@OneToMany(mappedBy = "disciplina")
+//	private List<Curso> cursos;	
 
-	
+	@ManyToMany
+	@JoinTable(name = "disciplna_grade", joinColumns = @JoinColumn(name = "codigo_disciplina"), inverseJoinColumns = @JoinColumn(name = "codigo_grade"))
+	private List<Grade> grades;
 	
 	public Long getCodigo_disciplina() {
 		return codigo_disciplina;
 	}
 	public void setCodigo_disciplina(Long codigo_disciplina) {
 		this.codigo_disciplina = codigo_disciplina;
+	}	
+	
+	public List<Grade> getGrades() {
+		return grades;
 	}
+	public void setGrades(List<Grade> grades) {
+		this.grades = grades;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -49,12 +62,12 @@ public class Disciplina implements Serializable {
 		this.descricao = descricao;
 	}	
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+//	public List<Curso> getCursos() {
+//		return cursos;
+//	}
+//	public void setCursos(List<Curso> cursos) {
+//		this.cursos = cursos;
+//	}
 	
 	@Override
 	public int hashCode() {

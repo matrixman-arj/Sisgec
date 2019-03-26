@@ -1,0 +1,1 @@
+ALTER TABLE curso DROP COLUMN codigo_disciplina;

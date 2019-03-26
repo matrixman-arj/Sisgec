@@ -2,6 +2,7 @@ package com.cursomarajoara.sisgec.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
@@ -53,10 +56,16 @@ public class Curso implements Serializable {
 	@NotNull(message = " O campo tipo é obrigatório!")
 	private TipoCurso tipoCurso;
 	
-	@ManyToOne
-	@JoinColumn(name = "codigo_disciplina")
-	@NotNull(message = " O campo disciplina é obrigatório!")
-	private Disciplina disciplina;
+//	@ManyToOne
+//	@JoinColumn(name = "codigo_disciplina")
+//	@NotNull(message = " O campo disciplina é obrigatório!")
+//	private Disciplina disciplina;
+	
+	@Size(min = 1, message = " Selecione pelo menos uma disciplina")
+	@ManyToMany
+	@JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "codigo_curso")
+				, inverseJoinColumns = @JoinColumn(name = "codigo_disciplina"))	
+	private List<Disciplina> disciplinas;
 	
 	@NotNull(message = " O campo valor é obtigatório")
 	@DecimalMin("0.01")
@@ -109,16 +118,25 @@ public class Curso implements Serializable {
 		this.tipoCurso = tipoCurso;
 	}
 	
-	public Disciplina getDisciplina() {
-		return disciplina;
+//	public Disciplina getDisciplina() {
+//		return disciplina;
+//	}
+//	public void setDisciplina(Disciplina disciplina) {
+//		this.disciplina = disciplina;
+//	}
+	
+
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
+	
 	
 	public BigDecimal getValor() {
 		return valor;
-	}
+	}	
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}	
