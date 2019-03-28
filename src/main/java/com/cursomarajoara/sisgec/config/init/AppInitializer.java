@@ -9,6 +9,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.cursomarajoara.sisgec.config.JPAConfig;
+import com.cursomarajoara.sisgec.config.SecurityConfig;
 import com.cursomarajoara.sisgec.config.ServiceConfig;
 import com.cursomarajoara.sisgec.config.WebConfig;
 
@@ -16,7 +17,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {		
-		return new Class<?>[] { JPAConfig.class, ServiceConfig.class };
+		return new Class<?>[] { JPAConfig.class, ServiceConfig.class, SecurityConfig.class };
 	}
 
 	@Override

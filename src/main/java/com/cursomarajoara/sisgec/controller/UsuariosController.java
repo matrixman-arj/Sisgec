@@ -15,6 +15,7 @@ import com.cursomarajoara.sisgec.repository.Grupos;
 import com.cursomarajoara.sisgec.repository.Usuarios;
 import com.cursomarajoara.sisgec.service.CadastroUsuarioService;
 import com.cursomarajoara.sisgec.service.exception.EmailUsuarioJaCadastradoException;
+import com.cursomarajoara.sisgec.service.exception.SenhaObrigatoriaUsuarioException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -47,6 +48,10 @@ public class UsuariosController {
 			cadastroUsuarioService.salvar(usuario);
 		} catch (EmailUsuarioJaCadastradoException e) {
 			result.rejectValue("email", e.getMessage(), e.getMessage());
+			return novo(usuario);
+			
+		}catch (SenhaObrigatoriaUsuarioException e) {
+			result.rejectValue("senha", e.getMessage(), e.getMessage());
 			return novo(usuario);
 		}
 		attributes.addFlashAttribute("mensagem", "Usuario salvo com sucesso!");
