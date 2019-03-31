@@ -1,0 +1,2 @@
+ALTER TABLE schema_version  
+RENAME TO flyway_schema_history

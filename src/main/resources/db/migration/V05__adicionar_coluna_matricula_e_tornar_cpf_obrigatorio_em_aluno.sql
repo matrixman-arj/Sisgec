@@ -1,2 +1,2 @@
-ALTER TABLE aluno ADD matricula VARCHAR(15) AFTER codigo;
+ALTER TABLE aluno ADD COLUMN matricula VARCHAR(15) NOT NULL AFTER codigo;
 ALTER TABLE aluno MODIFY cpf_cnpj VARCHAR(30) NOT NULL;

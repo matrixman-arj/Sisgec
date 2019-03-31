@@ -14,12 +14,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-		.withUser("admin").password("admin").roles("CADASTRO_CLIENTE");		
+		.withUser("admin").password("admin").roles("CADASTRO_ALUNO");		
 	}
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin();
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin().and().csrf().disable();
 	}
 	
 	@Bean
