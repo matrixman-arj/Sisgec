@@ -1,5 +1,6 @@
 package com.cursomarajoara.sisgec.repository.helper.usuario;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -13,6 +14,9 @@ public interface UsuariosQueries {
 	public Optional<Usuario> porEmailEAtivo(String email);
 	
 	public Page<Usuario> filtrar(UsuarioFilter filtro, Pageable pageable);
+	
+	
+	public List<String> permissoes(Usuario usuario); 
 
 
 
