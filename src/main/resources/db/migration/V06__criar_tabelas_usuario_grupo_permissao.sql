@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS usuario (
+CREATE TABLE usuario (
     codigo BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
@@ -7,17 +7,17 @@ CREATE TABLE IF NOT EXISTS usuario (
     data_nascimento DATE
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE IF NOT EXISTS grupo (
+CREATE TABLE grupo (
     codigo BIGINT(20) PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE IF NOT EXISTS permissao (
+CREATE TABLE permissao (
     codigo BIGINT(20) PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE IF NOT EXISTS usuario_grupo (
+CREATE TABLE usuario_grupo (
     codigo_usuario BIGINT(20) NOT NULL,
     codigo_grupo BIGINT(20) NOT NULL,
     PRIMARY KEY (codigo_usuario, codigo_grupo),
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS usuario_grupo (
     FOREIGN KEY (codigo_grupo) REFERENCES grupo(codigo)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
 
-CREATE TABLE IF NOT EXISTS grupo_permissao (
+CREATE TABLE grupo_permissao (
     codigo_grupo BIGINT(20) NOT NULL,
     codigo_permissao BIGINT(20) NOT NULL,
     PRIMARY KEY (codigo_grupo, codigo_permissao),
