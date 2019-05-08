@@ -77,6 +77,22 @@ Sisgec.MaskDate = (function(){
 	
 }());
 
+Sisgec.Security = (function() {
+	
+	function Security() {
+		this.token = $('input[name=_csrf]').val();
+		this.header = $('input[name=_csrf_header]').val();
+	}
+	
+	Security.prototype.enable = function() {
+		$(document).ajaxSend(function(event, jqxhr, settings){
+			jqxhr.setRequestHeader(this.header, this.token);
+		}.bind(this));
+	}
+	
+	return Security;
+}());
+
 $(function() {
 	var maskMoney = new Sisgec.MaskMoney();
 	maskMoney.enable();
@@ -89,4 +105,7 @@ $(function() {
 	
 	var maskDate = new Sisgec.MaskDate();
 	maskDate.enable();
+	
+	var security = new Sisgec.Security();
+	security.enable();
 }); 

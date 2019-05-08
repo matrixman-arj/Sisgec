@@ -37,7 +37,7 @@
 	
 	<div class="container-fluid">				      
 	
-		<form method="POST" th:object="${curso}" class="form-vertical  js-form-loading">
+		<form method="POST" th:object="${curso}" class="form-vertical  js-form-loading" th:action="@{/cursos/novo}">
 		
 			<sisgec:message/>
 			
