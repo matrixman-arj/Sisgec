@@ -53,7 +53,7 @@ public class CursosController {
 	
 	@RequestMapping(value = "/novo", method = RequestMethod.POST )
 	public ModelAndView  cadastrar(@Valid Curso curso, BindingResult result, Model model, RedirectAttributes attributes) {
-		if(result.hasErrors()) {					
+		if(result.hasErrors()) {			
 			return novo(curso);
 		}		
 		
