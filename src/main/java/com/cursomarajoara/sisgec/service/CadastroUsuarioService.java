@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.cursomarajoara.sisgec.enuns.StatusUsuario;
 import com.cursomarajoara.sisgec.model.Usuario;
 import com.cursomarajoara.sisgec.repository.Usuarios;
 import com.cursomarajoara.sisgec.service.exception.EmailUsuarioJaCadastradoException;
@@ -40,5 +41,10 @@ public class CadastroUsuarioService {
 		
 		usuarios.save(usuario);
 		
+	}
+	
+	@Transactional
+	public void alterarStatus(Long[] codigos, StatusUsuario statusUsuario) {
+		statusUsuario.executar(codigos, usuarios);
 	}
 }

@@ -88,7 +88,7 @@
 
 /*
 ###################
-# P√ÅGINAS DO SISTEMA
+# P¡GINAS DO SISTEMA
 ###################
 */
 
@@ -159,6 +159,12 @@
 	text-align: right;
 }
 
+/* Colunas - Pesquisa de usu·rios */
+.table-usuarios-col-status {
+	width: 30px;
+}
+
+
 
 /* Tabela Simples */
 .sisgec-tabela-simples {
@@ -188,7 +194,7 @@
 
 /*
 ######################################
-# CUSTOMIZA√á√ÉO DE COMPONENTES
+# CUSTOMIZA«√O DE COMPONENTES
 ######################################
 */
 
