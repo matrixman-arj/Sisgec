@@ -13,6 +13,19 @@
 		          <a href="dashboard.html"><i class="fa  fa-fw"></i><span></span></a>
 		          <a href="dashboard.html"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
 		        </li>
+		        
+		        <li class="marajo-menu__item">
+          			<a href="#">
+            			<i class="fa  fa-fw  fa-credit-card"></i><span>Vendas</span>
+            			<i class="marajo-menu__navigation-icon  fa"></i>
+          			</a>
+      
+          			<ul class="marajo-menu__list  sisgec-menu__list--sublist">
+			            <li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas}">
+			            	<a th:href="@{/vendas/nova}">Nova venda</a>
+			            </li>
+			        </ul>
+			    </li>
 		
 		        <li class="marajo-menu__item">
 		          <a href="#">
