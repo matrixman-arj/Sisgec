@@ -27,6 +27,7 @@ import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.validation.AlunoGroupSequenceProvider;
 import com.cursomarajoara.sisgec.validation.group.CnpjGroup;
 import com.cursomarajoara.sisgec.validation.group.CpfGroup;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "aluno")
@@ -70,6 +71,7 @@ public class Aluno implements Serializable{
 	@Email(message = " e-mail inválido")
 	private String email;
 	
+	@JsonIgnore
 	@Embedded
 	private Endereco endereco;
 	
