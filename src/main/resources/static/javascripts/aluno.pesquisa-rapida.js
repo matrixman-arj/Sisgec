@@ -14,8 +14,12 @@ Sisgec.PesquisaRapidaAluno = (function(){
 	
 	PesquisaRapidaAluno.prototype.iniciar = function(){
 		this.pesquisaRapidaBtn.on('click', onPesquisaRapidaClicado.bind(this));
-		
-	}	
+		this.pesquisaRapidaAlunosModal.on('shown.bs.modal', onModalShow.bind(this));
+	}
+	
+	function onModalShow(){
+		this.nomeInput.focus();
+	}
 		
 		function onPesquisaRapidaClicado(event){
 			event.preventDefault();
@@ -33,9 +37,13 @@ Sisgec.PesquisaRapidaAluno = (function(){
 	}
 	
 	function onPesquisaConcluida(resultado){
+		this.mensagemErro.addClass('hidden');		
+		
 		var html = this.template(resultado);
 		this.containerTabelaPesquisa.html(html);
-		this.mensagemErro.addClass('hidden');
+		
+		var tabelaAlunoPesquisaRapida = new Sisgec.TabelaAlunoPesquisaRapida(this.pesquisaRapidaAlunosModal);
+		tabelaAlunoPesquisaRapida.iniciar();
 	}
 	
 	function onErroPesquisa(){
@@ -43,6 +51,28 @@ Sisgec.PesquisaRapidaAluno = (function(){
 	}
 	
 	return PesquisaRapidaAluno;
+	
+}());
+
+Sisgec.TabelaAlunoPesquisaRapida = (function(){
+	function TabelaAlunoPesquisaRapida(modal){
+		this.modalAluno = modal;
+		this.aluno = $('.js-aluno-pesquisa-rapida');
+	}
+	
+	TabelaAlunoPesquisaRapida.prototype.iniciar = function(){
+		this.aluno.on('click', onAlunoSelecionado.bind(this));
+	}
+	
+	function onAlunoSelecionado(evento){
+		this.modalAluno.modal('hide');
+		
+		var alunoSelecionado = $(evento.currentTarget);
+		$('#nomeCliente').val(alunoSelecionado.data('nome'));
+		$('#codigoCliente').val(alunoSelecionado.data('codigo'));
+	}
+	
+	return TabelaAlunoPesquisaRapida;
 	
 }());
 
