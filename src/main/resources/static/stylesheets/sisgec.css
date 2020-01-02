@@ -88,7 +88,7 @@
 
 /*
 ###################
-# PÁGINAS DO SISTEMA
+# Pï¿½GINAS DO SISTEMA
 ###################
 */
 
@@ -159,7 +159,7 @@
 	text-align: right;
 }
 
-/* Colunas - Pesquisa de usuários */
+/* Colunas - Pesquisa de usuï¿½rios */
 .table-usuarios-col-status {
 	width: 30px;
 }
@@ -192,12 +192,12 @@
 	text-align: right;
 }
 
-/* Tabela Cervejas página de Venda */
-.marajo-tabela-cervejas {
+/* Tabela Cursos pÃ¡gina de Venda */
+.marajo-tabela-cursos {
 	margin-bottom: 15px;
 }
 
-.marajo-tabela-cervejas__vazio {
+.marajo-tabela-cursos__vazio {
 	padding: 15px 15px;
 	
 	border: 1px dashed #ddd;
@@ -212,11 +212,111 @@
 
 /*
 ######################################
-# CUSTOMIZAÇÃO DE COMPONENTES
+# CUSTOMIZAï¿½ï¿½O DE COMPONENTES
 ######################################
 */
 
 .checkbox input[type="checkbox"]:checked + input + label::after {
     font-family: 'FontAwesome';
     content: "\f00c"; 
+}
+
+/* Easy Autocomplete */
+.easy-autocomplete input {
+	border-radius: 2px !important;
+}
+
+.easy-autocomplete-container ul li {
+	font-size: 1em !important;
+	padding: 0px 5px !important;
+}
+
+/* Tabela Item */
+.marajo-tabela-item {
+	position: relative; /* Para que o painel de exclusÃ£o apareÃ§a dentro da linha */
+	
+	padding: 15px 0;
+	
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+.marajo-tabela-item:after {
+	clear: both;
+	display: block;
+    content: "";
+}
+
+.marajo-tabela-item ~ .marajo-tabela-item {
+	border-top: 1px solid #ddd;
+}
+
+.marajo-tabela-item__coluna {
+	padding: 0 10px;
+}
+
+.marajo-tabela-item__coluna--foto {
+	float: left;
+	width: 60px;
+	
+	text-align: center;
+}
+
+.marajo-tabela-item__coluna--valores {
+	padding-right: 0px;
+}
+
+.marajo-tabela-item__coluna--detalhes, .marajo-tabela-item__coluna--valores {
+	margin-left: 60px;
+}
+
+.marajo-tabela-curso-nome {
+	font-weight: 500;
+	font-size: 1.1em;
+	display: block;
+}
+
+.marajo-tabela-curso-origem {
+	color: #aaa;
+	display: block;
+	font-weight: 200;
+}
+
+.marajo-tabela-curso-campo-quantidade {
+	width: 30px;
+	text-align: right;
+}
+
+.marajo-tabela-curso-valor-pequeno {
+	font-weight: 300;
+	font-size: 1em;
+}
+
+.marajo-tabela-curso-valor-medio {
+	font-weight: 300;
+	font-size: 1.3em;
+}
+
+.marajo-tabela-curso-valor-grande {
+	font-weight: 300;
+	font-size: 1.6em;
+}
+
+@media (min-width: 768px) { /* screen-sm-min */
+	.marajo-tabela-item__coluna {
+		float: left;
+		margin-left: 0px;
+	}
+	
+	.marajo-tabela-item__coluna--detalhes {
+		width: calc(70% - 30px);
+	}
+	
+	.marajo-tabela-item__coluna--valores {
+		width: calc(30% - 30px);
+
+		text-align: right;
+	}
 }

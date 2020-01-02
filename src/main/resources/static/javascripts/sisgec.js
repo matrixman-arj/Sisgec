@@ -93,6 +93,11 @@ Sisgec.Security = (function() {
 	return Security;
 }());
 
+Sisgec.formatarMoeda = function(valor) {
+//	numeral.language('pt-br');
+	return numeral(valor).format('0,0.00');
+}
+
 $(function() {
 	var maskMoney = new Sisgec.MaskMoney();
 	maskMoney.enable();

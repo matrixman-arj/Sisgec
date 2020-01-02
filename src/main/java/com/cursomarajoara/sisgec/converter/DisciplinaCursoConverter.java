@@ -8,10 +8,10 @@ import com.cursomarajoara.sisgec.model.Disciplina;
 public class DisciplinaCursoConverter implements Converter<String, Disciplina> {
 
 	@Override
-	public Disciplina convert(String codigo_disciplina) {
-		if (!StringUtils.isEmpty(codigo_disciplina)) {
+	public Disciplina convert(String codigo) {
+		if (!StringUtils.isEmpty(codigo)) {
 			Disciplina disciplina = new Disciplina();
-			disciplina.setCodigo_disciplina(Long.valueOf(codigo_disciplina));
+			disciplina.setCodigo(Long.valueOf(codigo));
 			return disciplina;
 		}
 		

@@ -1,0 +1,8 @@
+ALTER TABLE curso
+CHANGE codigo_curso codigo BIGINT(20);
+
+ALTER TABLE disciplina
+CHANGE codigo_disciplina codigo BIGINT(20);
+
+ALTER TABLE tipoCurso
+CHANGE codigo_tipoCurso codigo BIGINT(20);

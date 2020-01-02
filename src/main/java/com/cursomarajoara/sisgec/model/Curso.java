@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -25,6 +27,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.enuns.Turno;
+import com.cursomarajoara.sisgec.validation.SKU;
 
 @Entity
 @Table(name = "curso")
@@ -34,7 +37,11 @@ public class Curso implements Serializable {
 
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
-	private Long codigo_curso;
+	private Long codigo;
+	
+	@SKU
+	@NotBlank(message = " O campo sku é obrigatório!")
+	private String sku;
 	
 	@NotBlank(message = " O campo nome é obrigatório!")
 	private String nome;
@@ -51,9 +58,9 @@ public class Curso implements Serializable {
 	@NotNull(message = " O campo turno é obrigatório!")
 	private Turno turno;
 	
-	@ManyToOne
-	@JoinColumn(name = "codigo_tipoCurso")
 	@NotNull(message = " O campo tipo é obrigatório!")
+	@ManyToOne
+	@JoinColumn(name = "codigo_tipoCurso")	
 	private TipoCurso tipoCurso;
 	
 //	@ManyToOne
@@ -76,7 +83,19 @@ public class Curso implements Serializable {
 	
 	@Column(name = "content_type")
 	private String contentType;
-		
+	
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		sku = sku.toUpperCase();
+	}
+	
+	public String getSku() {
+		return sku;
+	}
+	public void setSku(String sku) {
+		this.sku = sku;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -98,11 +117,11 @@ public class Curso implements Serializable {
 		this.descricao = descricao;
 	}	
 	
-	public Long getCodigo_curso() {
-		return codigo_curso;
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setCodigo_curso(Long codigo_curso) {
-		this.codigo_curso = codigo_curso;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 	public Turno getTurno() {
 		return turno;
@@ -163,7 +182,7 @@ public class Curso implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo_curso == null) ? 0 : codigo_curso.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 	@Override
@@ -175,10 +194,10 @@ public class Curso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Curso other = (Curso) obj;
-		if (codigo_curso == null) {
-			if (other.codigo_curso != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!codigo_curso.equals(other.codigo_curso))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}	

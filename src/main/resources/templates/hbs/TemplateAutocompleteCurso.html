@@ -1,0 +1,14 @@
+<script id="template-autocomplete-curso" type="text/x-handlebars-template">
+	<div class="marajo-tabela-item">
+		<div class="marajo-tabela-item__coluna  marajo-tabela-item__coluna--foto">
+			<img th:src="@{/fotos/thumbnail.{{foto}}}" class="img-responsive" />
+		</div>
+		<div class="marajo-tabela-item__coluna  marajo-tabela-item__coluna--detalhes">
+			<span class="marajo-tabela-curso-nome">{{nome}}</span>
+			<span class="label  label-default">{{sku}}</span>			
+		</div>
+		<div class="marajo-tabela-item__coluna  marajo-tabela-item__coluna--valores">
+			<div class="marajo-tabela-curso-valor-medio">R${{valorFormatado}}</div>
+		</div>
+	</div>
+</script>

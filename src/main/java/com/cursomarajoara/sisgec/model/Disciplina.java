@@ -20,7 +20,7 @@ public class Disciplina implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo_disciplina;
+	private Long codigo;
 	
 	private String nome;
 	
@@ -33,11 +33,11 @@ public class Disciplina implements Serializable {
 	@JoinTable(name = "disciplna_grade", joinColumns = @JoinColumn(name = "codigo_disciplina"), inverseJoinColumns = @JoinColumn(name = "codigo_grade"))
 	private List<Grade> grades;
 	
-	public Long getCodigo_disciplina() {
-		return codigo_disciplina;
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setCodigo_disciplina(Long codigo_disciplina) {
-		this.codigo_disciplina = codigo_disciplina;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}	
 	
 	public List<Grade> getGrades() {
@@ -72,7 +72,7 @@ public class Disciplina implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo_disciplina == null) ? 0 : codigo_disciplina.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 	@Override
@@ -84,10 +84,10 @@ public class Disciplina implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Disciplina other = (Disciplina) obj;
-		if (codigo_disciplina == null) {
-			if (other.codigo_disciplina != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!codigo_disciplina.equals(other.codigo_disciplina))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}

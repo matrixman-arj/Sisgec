@@ -55,8 +55,8 @@ Sisgec.TipoCursoCadastroRapido = (function(){
 	
 	function onTipoCursoSalvo(tipoCurso) {
 		var comboTipoCurso = $('#tipoCurso');
-		comboTipoCurso.append('<option value=' + tipoCurso.codigo_tipoCurso + '>' + tipoCurso.nome + '</option>');
-		comboTipoCurso.val(tipoCurso.codigo_tipoCurso);
+		comboTipoCurso.append('<option value=' + tipoCurso.codigo + '>' + tipoCurso.nome + '</option>');
+		comboTipoCurso.val(tipoCurso.codigo);
 		this.modal.modal('hide');
 		
 	}

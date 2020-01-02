@@ -21,7 +21,7 @@ public class TipoCurso implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo_tipoCurso;
+	private Long codigo;
 	
 	@NotBlank(message = " O campo nome é obrigatório!")
 	private String nome;	
@@ -33,11 +33,11 @@ public class TipoCurso implements Serializable {
 	@Size(min = 1, max = 50, message = " O tamanho do campo descrição deve estar entre 1 e 50")
 	private String descricao;	
 		
-	public Long getCodigo_tipoCurso() {
-		return codigo_tipoCurso;
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setCodigo_tipoCurso(Long codigo_tipoCurso) {
-		this.codigo_tipoCurso = codigo_tipoCurso;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 	
 	public String getNome() {
@@ -64,7 +64,7 @@ public class TipoCurso implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codigo_tipoCurso == null) ? 0 : codigo_tipoCurso.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 	@Override
@@ -76,10 +76,10 @@ public class TipoCurso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoCurso other = (TipoCurso) obj;
-		if (codigo_tipoCurso == null) {
-			if (other.codigo_tipoCurso != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!codigo_tipoCurso.equals(other.codigo_tipoCurso))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}

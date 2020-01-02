@@ -1,0 +1,3 @@
+ALTER TABLE curso
+   ADD sku VARCHAR(10);
+   

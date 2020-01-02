@@ -8,10 +8,10 @@ import com.cursomarajoara.sisgec.model.TipoCurso;
 public class TipoCursoConverter implements Converter<String, TipoCurso> {
 
 	@Override
-	public TipoCurso convert(String codigo_tipoCurso) {
-		if (!StringUtils.isEmpty(codigo_tipoCurso)) {
+	public TipoCurso convert(String codigo) {
+		if (!StringUtils.isEmpty(codigo)) {
 			TipoCurso tipoCurso = new TipoCurso();
-			tipoCurso.setCodigo_tipoCurso(Long.valueOf(codigo_tipoCurso));
+			tipoCurso.setCodigo(Long.valueOf(codigo));
 			return tipoCurso;
 		}		
 		return null;

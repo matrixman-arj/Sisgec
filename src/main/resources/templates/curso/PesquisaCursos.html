@@ -44,7 +44,7 @@
 					<label class="control-label" for="tipoCurso">Tipo</label>
 					<select id="tipoCurso" class="form-control" th:field="*{tipoCurso}" >
 						<option value="">Todos os tipos</option>
-						<option th:each="tipoCurso : ${tiposCursos}" th:text="${tipoCurso.nome}" th:value="${tipoCurso.codigo_tipoCurso}"></option>
+						<option th:each="tipoCurso : ${tiposCursos}" th:text="${tipoCurso.nome}" th:value="${tipoCurso.codigo}"></option>
 					</select>								
 				</div>
 
@@ -53,7 +53,7 @@
 <!-- 					<div> -->
 <!-- 						<th:block th:each="tipoCurso : ${tiposCursos}"> -->
 <!-- 							<div class="radio radio-inline"> -->
-<!-- 								<input th:id="|id_${tipoCurso}|" type="radio" th:value="${tipoCurso.codigo_tipoCurso}" th:field="*{tipoCurso}"/> -->
+<!-- 								<input th:id="|id_${tipoCurso}|" type="radio" th:value="${tipoCurso.codigo}" th:field="*{tipoCurso}"/> -->
 <!-- 								<label th:for="|id_${tipoCurso}|" th:text="${tipoCurso.nome}" class="control-label">Farma</label> -->
 <!-- 							</div> -->
 <!-- 						</th:block> -->
@@ -82,7 +82,7 @@
 <!-- 					<label class="control-label" for="disciplina">Disciplina</label> -->
 <!-- 					<select id="Disciplina" class="form-control" th:field="*{disciplina}" > -->
 <!-- 						<option value="">Todos as disciplinas</option> -->
-<!-- 						<option th:each="disciplina : ${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.codigo_disciplina}"></option> -->
+<!-- 						<option th:each="disciplina : ${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.codigo}"></option> -->
 <!-- 					</select>								 -->
 <!-- 				</div>	 -->
 			
@@ -91,7 +91,7 @@
 						<div>
 							<th:block th:each="disciplina : ${disciplinas}">
 								<div class="radio radio-inline">
-									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina.codigo_disciplina}" th:field="*{disciplina}"/>
+									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina.codigo}" th:field="*{disciplina}"/>
 									<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
 								</div>
 							</th:block>
