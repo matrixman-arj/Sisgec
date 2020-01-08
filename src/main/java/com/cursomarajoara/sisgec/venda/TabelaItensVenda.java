@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.model.ItemVenda;
 
 public class TabelaItensVenda {
@@ -18,7 +19,14 @@ public class TabelaItensVenda {
 		
 	}
 	
-	
+	public void adicionarItem(Curso curso, Integer quantidade) {
+		ItemVenda itemVenda = new ItemVenda();
+		itemVenda.setCurso(curso);
+		itemVenda.setQuantidade(quantidade);
+		itemVenda.setValorUnitario(curso.getValor());
+		
+		itens.add(itemVenda);
+	}
 	
 
 }
