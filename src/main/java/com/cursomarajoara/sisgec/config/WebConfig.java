@@ -40,6 +40,7 @@ import com.cursomarajoara.sisgec.converter.DisciplinaCursoConverter;
 import com.cursomarajoara.sisgec.converter.EstadoConverter;
 import com.cursomarajoara.sisgec.converter.GrupoConverter;
 import com.cursomarajoara.sisgec.converter.TipoCursoConverter;
+import com.cursomarajoara.sisgec.session.TabelaItensVenda;
 import com.cursomarajoara.sisgec.thymeleaf.SisgecDialect;
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.google.common.cache.CacheBuilder;
@@ -47,7 +48,7 @@ import com.google.common.cache.CacheBuilder;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 @Configuration
-@ComponentScan(basePackageClasses = { CursosController.class })
+@ComponentScan(basePackageClasses = { CursosController.class, TabelaItensVenda.class })
 @EnableWebMvc
 @EnableSpringDataWebSupport
 public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {

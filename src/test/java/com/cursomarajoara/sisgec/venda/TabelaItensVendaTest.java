@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cursomarajoara.sisgec.model.Curso;
+import com.cursomarajoara.sisgec.session.TabelaItensVenda;
 
 public class TabelaItensVendaTest {
 	

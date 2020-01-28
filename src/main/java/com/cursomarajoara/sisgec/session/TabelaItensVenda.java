@@ -1,12 +1,17 @@
-package com.cursomarajoara.sisgec.venda;
+package com.cursomarajoara.sisgec.session;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.SessionScope;
+
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.model.ItemVenda;
 
+@SessionScope
+@Component
 public class TabelaItensVenda {
 	
 	private List<ItemVenda> itens = new ArrayList<>();
@@ -26,6 +31,10 @@ public class TabelaItensVenda {
 		itemVenda.setValorUnitario(curso.getValor());
 		
 		itens.add(itemVenda);
+	}
+	
+	public int total() {
+		return itens.size();
 	}
 	
 

@@ -6,6 +6,8 @@ Sisgec.Autocomplete = (function() {
 		this.skuOuNomeInput = $('.js-sku-nome-curso-input');
 		var htmlTemplateAutocomplete = $('#template-autocomplete-curso').html();
 		this.template = Handlebars.compile(htmlTemplateAutocomplete);
+		this.emitter = $({});
+		this.on = this.emitter.on.bind(this.emitter);
 		
 	}
 	
@@ -22,25 +24,28 @@ Sisgec.Autocomplete = (function() {
 			},
 			template: {
 				type: 'custom',
-				method: function(nome, curso){
-
-					curso.valorFormatado = Sisgec.formatarMoeda(curso.valor);
-					return this.template(curso);
-				}.bind(this)
+				method: template.bind(this)
+			},
+			list: {
+				onChooseEvent: onItemSelecionado.bind(this)
 			}
 		};
 		
 		this.skuOuNomeInput.easyAutocomplete(options);
 	}
 	
+	function onItemSelecionado() {
+		 this.emitter.trigger('item-selecionado', this.skuOuNomeInput.getSelectedItemData());
+	}
+	
+	function template(nome, curso) {
+		curso.valorFormatado = Sisgec.formatarMoeda(curso.valor);
+		return this.template(curso);
+	}
+	
 	return Autocomplete
 	
 }());
 
-$(function() {
-	
-	var autocomplete = new Sisgec.Autocomplete();
-	autocomplete.iniciar();
-	
-})
+
 
