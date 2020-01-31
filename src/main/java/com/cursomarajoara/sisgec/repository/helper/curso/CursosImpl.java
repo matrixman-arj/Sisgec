@@ -1,6 +1,5 @@
 package com.cursomarajoara.sisgec.repository.helper.curso;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;

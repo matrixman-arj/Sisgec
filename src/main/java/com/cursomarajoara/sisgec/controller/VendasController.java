@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.repository.Cursos;
@@ -27,11 +27,12 @@ public class VendasController {
 	}
 	
 	@PostMapping("/item")
-	public @ResponseBody String adicionarItem(Long codigoCurso) {
+	public ModelAndView adicionarItem(Long codigoCurso) {
 		Curso curso = cursos.findOne(codigoCurso);
 		tabelaItensVenda.adicionarItem(curso, 1);
-		System.out.println(">>> total de itens: " + tabelaItensVenda.total());
-		return "Item adicionado!";
+		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
+		mv.addObject("itens", tabelaItensVenda.getItens());
+		return mv;
 	}
 
 }

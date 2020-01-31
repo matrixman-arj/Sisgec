@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">	
+	
+	<head>		
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
+	</head>
+	
+	<div class="marajo-tabela-item" th:each="item : ${itens}">
+		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--foto">
+			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.curso.fotoOuMock})}" class="img-responsive"/>
+		</div>
+		
+		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--detalhes">
+			<span  class="marajo-tabela-curso-nome" th:text="${item.curso.nome}">Enfermagem</span>
+			<span  class="label label-default" th:text="${item.curso.sku}">AA1111</span>
+		</div>
+	
+		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--valores">
+			<div  class="marajo-tabela-curso-valor-pequeno">
+				<input type="text" maxlength="3" class="marajo-tabela-curso-campo-quantidade" value="1"/>
+				<span>x R$[[${{item.valorUnitario}}]]</span>
+			</div>
+			<div  class="marajo-tabela-curso-valor-grande">R$[[${{item.valorUnitario}}]]</div>								
+		</div>
+		
+	</div>
+	
+</html>

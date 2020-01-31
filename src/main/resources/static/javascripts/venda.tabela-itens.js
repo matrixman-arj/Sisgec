@@ -2,6 +2,7 @@ Sisgec.TabelaItens = (function() {
 	
 	function TabelaItens(autocomplete){
 		this.autocomplete = autocomplete;
+		this.tabelaCursosContainer = $('.js-tabela-cursos-container');
 	}
 	
 	TabelaItens.prototype.iniciar = function(){
@@ -17,9 +18,12 @@ Sisgec.TabelaItens = (function() {
 			}
 		});
 		
-		resposta.done(function(data) {
-			console.log('retorno', data);
-		});
+		resposta.done(onItemAdicionadoNoServidor.bind(this));
+	}
+	
+	function onItemAdicionadoNoServidor(html){
+		this.tabelaCursosContainer.html(html);
+		
 	}
 	
 	return TabelaItens;
