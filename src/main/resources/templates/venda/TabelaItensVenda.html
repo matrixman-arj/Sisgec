@@ -18,10 +18,10 @@
 	
 		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--valores">
 			<div  class="marajo-tabela-curso-valor-pequeno">
-				<input type="text" maxlength="3" class="marajo-tabela-curso-campo-quantidade" value="1"/>
+				<input type="text" maxlength="3" class="marajo-tabela-curso-campo-quantidade" th:value="${item.quantidade}"/>
 				<span>x R$[[${{item.valorUnitario}}]]</span>
 			</div>
-			<div  class="marajo-tabela-curso-valor-grande">R$[[${{item.valorUnitario}}]]</div>								
+			<div  class="marajo-tabela-curso-valor-grande">R$[[${{item.valorTotal}}]]</div>								
 		</div>
 		
 	</div>

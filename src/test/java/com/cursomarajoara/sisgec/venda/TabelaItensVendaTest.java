@@ -38,10 +38,12 @@ public class TabelaItensVendaTest {
 	@Test
 	public void deveCalcularValorTotalComVariosItens() throws Exception {
 		Curso c1 = new Curso();
+		c1.setCodigo(1L);
 		BigDecimal v1 = new BigDecimal("8.90");
 		c1.setValor(v1);
 		
 		Curso c2 = new Curso();
+		c2.setCodigo(2L);
 		BigDecimal v2 = new BigDecimal("4.99");
 		c2.setValor(v2);
 		
@@ -49,5 +51,18 @@ public class TabelaItensVendaTest {
 		tabelaItensVenda.adicionarItem(c2, 2);
 		
 		assertEquals(new BigDecimal("18.88"), tabelaItensVenda.getValorTotal());
+	}
+	
+	@Test
+	public void deveManterTamnhoDaListaParaMesmosCursos() throws Exception {
+		Curso c1 = new Curso();
+		c1.setCodigo(1L);
+		c1.setValor(new BigDecimal("4.50"));
+		
+		tabelaItensVenda.adicionarItem(c1, 1);
+		tabelaItensVenda.adicionarItem(c1, 1);
+		
+		assertEquals(1, tabelaItensVenda.total());
+		assertEquals(new BigDecimal("9.00"), tabelaItensVenda.getValorTotal());
 	}
 }
