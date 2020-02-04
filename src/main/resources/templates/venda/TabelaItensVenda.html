@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">	
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:data="http://www.thymeleaf.org/extras/data">	
 	
 	<head>		
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
@@ -18,7 +19,9 @@
 	
 		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--valores">
 			<div  class="marajo-tabela-curso-valor-pequeno">
-				<input type="text" maxlength="3" class="marajo-tabela-curso-campo-quantidade" th:value="${item.quantidade}"/>
+				<input type="text" maxlength="3" 
+					class="marajo-tabela-curso-campo-quantidade js-tabela-curso-quantidade-item" 
+					th:value="${item.quantidade}" data:codigo-curso="${item.curso.codigo}"/>
 				<span>x R$[[${{item.valorUnitario}}]]</span>
 			</div>
 			<div  class="marajo-tabela-curso-valor-grande">R$[[${{item.valorTotal}}]]</div>								

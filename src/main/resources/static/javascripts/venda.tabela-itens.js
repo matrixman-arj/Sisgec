@@ -18,12 +18,30 @@ Sisgec.TabelaItens = (function() {
 			}
 		});
 		
-		resposta.done(onItemAdicionadoNoServidor.bind(this));
+		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
 	
-	function onItemAdicionadoNoServidor(html){
+	function onItemAtualizadoNoServidor(html){
 		this.tabelaCursosContainer.html(html);
+		$('.js-tabela-curso-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
 		
+	}
+	
+	function onQuantidadeItemAlterado(evento){
+		var input = $(evento.target);
+		var quantidade = input.val();
+		var codigoCurso = input.data('codigo-curso');
+		
+		var resposta = $.ajax({
+			url:'item/' + codigoCurso,
+			method: 'PUT',
+			data: {
+				quantidade: quantidade
+			}
+			
+		});
+		
+		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
 	
 	return TabelaItens;

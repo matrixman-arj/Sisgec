@@ -26,9 +26,7 @@ public class TabelaItensVenda {
 	}
 	
 	public void adicionarItem(Curso curso, Integer quantidade) {
-		Optional<ItemVenda> itemVendaOptional = itens.stream()
-			.filter(i -> i.getCurso().equals(curso))
-			.findAny();
+		Optional<ItemVenda> itemVendaOptional = buscarItemPorCurso(curso);
 		
 		ItemVenda itemVenda = null;
 		if (itemVendaOptional.isPresent()) {
@@ -44,6 +42,12 @@ public class TabelaItensVenda {
 			
 		}		
 	}
+
+	
+	public void alterarQuantidadeItens(Curso curso, Integer quantidade) {
+		ItemVenda itemVenda = buscarItemPorCurso(curso).get();
+		itemVenda.setQuantidade(quantidade);
+	}
 	
 	public int total() {
 		return itens.size();
@@ -52,5 +56,11 @@ public class TabelaItensVenda {
 	public List<ItemVenda> getItens() {
 		
 		return itens;
+	}
+	
+	private Optional<ItemVenda> buscarItemPorCurso(Curso curso) {
+		return itens.stream()
+				.filter(i -> i.getCurso().equals(curso))
+				.findAny();		
 	}
 }
