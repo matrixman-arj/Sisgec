@@ -24,7 +24,7 @@ Sisgec.TabelaItens = (function() {
 	function onItemAtualizadoNoServidor(html){
 		this.tabelaCursosContainer.html(html);
 		$('.js-tabela-curso-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
-		
+		$('.js-tabela-item').on('dblclick', onDoubleClick);
 	}
 	
 	function onQuantidadeItemAlterado(evento){
@@ -42,6 +42,11 @@ Sisgec.TabelaItens = (function() {
 		});
 		
 		resposta.done(onItemAtualizadoNoServidor.bind(this));
+	}
+	
+	function onDoubleClick(evento){
+		var item = $(evento.currentTarget);
+		item.toggleClass('solicitando-exclusao');
 	}
 	
 	return TabelaItens;
