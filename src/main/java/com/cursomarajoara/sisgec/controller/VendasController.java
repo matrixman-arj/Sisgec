@@ -2,6 +2,7 @@ package com.cursomarajoara.sisgec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,18 +33,25 @@ public class VendasController {
 	public ModelAndView adicionarItem(Long codigoCurso) {
 		Curso curso = cursos.findOne(codigoCurso);
 		tabelaItensVenda.adicionarItem(curso, 1);
-		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
-		mv.addObject("itens", tabelaItensVenda.getItens());
-		return mv;
+		return mvTabelaItensVenda();
 	}
 	
 	@PutMapping("/item/{codigoCurso}")
-	public ModelAndView alterarQuantidadeItem(@PathVariable Long codigoCurso, Integer quantidade) {
-		Curso curso = cursos.findOne(codigoCurso);
+	public ModelAndView alterarQuantidadeItem(@PathVariable("codigoCurso") Curso curso, Integer quantidade) {
 		tabelaItensVenda.alterarQuantidadeItens(curso, quantidade);
+		return mvTabelaItensVenda();				
+	}
+	
+	@DeleteMapping("/item/{codigoCurso}")
+	public ModelAndView excluirItem(@PathVariable("codigoCurso") Curso curso) {
+		tabelaItensVenda.excluirItem(curso);
+		return mvTabelaItensVenda();	
+	}
+
+	private ModelAndView mvTabelaItensVenda() {
 		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
 		mv.addObject("itens", tabelaItensVenda.getItens());
-		return mv;				
+		return mv;
 	}
 
 }

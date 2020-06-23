@@ -350,7 +350,6 @@
 	
 	.marajo-tabela-item__coluna--valores {
 		width: calc(30% - 30px);
-
 		text-align: right;
 	}
 }

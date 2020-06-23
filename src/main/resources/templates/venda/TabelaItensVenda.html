@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:data="http://www.thymeleaf.org/extras/data">	
 	
@@ -29,8 +29,13 @@
 		
 		<div class="marajo-tabela-item__painel-exclusao">
 			<span class="marajo-tabela-item__titulo-exclusao">Excluir este item da venda?</span>
-			<button type="button" class="btn  btn-danger">Sim, excluir!</button>
-		</div>
-		
+			<button type="button" class="btn  btn-danger js-exclusao-item-btn" 
+				data:codigo-curso="${item.curso.codigo}">Sim, excluir!</button>
+		</div>		
+	</div>
+	
+	<div class="marajo-tabela-cursos__vazio" th:if="${itens.empty}">
+		<i class="glyphicon  glyphicon-shopping-cart"></i> 
+		<span>Você ainda não adicionou nenhum curso ou produto.</span>
 	</div>	
 </html>

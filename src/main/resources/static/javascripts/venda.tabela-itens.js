@@ -25,6 +25,7 @@ Sisgec.TabelaItens = (function() {
 		this.tabelaCursosContainer.html(html);
 		$('.js-tabela-curso-quantidade-item').on('change', onQuantidadeItemAlterado.bind(this));
 		$('.js-tabela-item').on('dblclick', onDoubleClick);
+		$('.js-exclusao-item-btn').on('click', onExclusaoItemClick.bind(this));
 	}
 	
 	function onQuantidadeItemAlterado(evento){
@@ -43,10 +44,20 @@ Sisgec.TabelaItens = (function() {
 		
 		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
-	
+			
 	function onDoubleClick(evento){
 		var item = $(evento.currentTarget);
 		item.toggleClass('solicitando-exclusao');
+	}
+	
+	function onExclusaoItemClick(evento){
+		var codigoCurso = $(evento.target).data('codigo-curso');
+		var resposta = $.ajax({
+			url: 'item/' + codigoCurso,
+			method: 'DELETE'
+		});
+		
+		resposta.done(onItemAtualizadoNoServidor.bind(this));
 	}
 	
 	return TabelaItens;
