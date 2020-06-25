@@ -1,4 +1,4 @@
-package com.cursomarajoara.sisgec.venda;
+package com.cursomarajoara.sisgec.session;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +16,7 @@ public class TabelaItensVendaTest {
 	
 	@Before
 	public void setUp() {
-		this.tabelaItensVenda = new TabelaItensVenda();
+		this.tabelaItensVenda = new TabelaItensVenda("1");
 	}
 	
 	@Test

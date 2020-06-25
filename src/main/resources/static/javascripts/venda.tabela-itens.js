@@ -3,6 +3,7 @@ Sisgec.TabelaItens = (function() {
 	function TabelaItens(autocomplete){
 		this.autocomplete = autocomplete;
 		this.tabelaCursosContainer = $('.js-tabela-cursos-container');
+		this.uuid = $('#uuid').val();
 	}
 	
 	TabelaItens.prototype.iniciar = function(){
@@ -14,7 +15,8 @@ Sisgec.TabelaItens = (function() {
 			url:'item',
 			method: 'POST',
 			data: {
-				codigoCurso: item.codigo
+				codigoCurso: item.codigo,
+				uuid: this.uuid
 			}
 		});
 		
@@ -37,7 +39,8 @@ Sisgec.TabelaItens = (function() {
 			url:'item/' + codigoCurso,
 			method: 'PUT',
 			data: {
-				quantidade: quantidade
+				quantidade: quantidade,
+				uuid: this.uuid
 			}
 			
 		});
@@ -53,7 +56,7 @@ Sisgec.TabelaItens = (function() {
 	function onExclusaoItemClick(evento){
 		var codigoCurso = $(evento.target).data('codigo-curso');
 		var resposta = $.ajax({
-			url: 'item/' + codigoCurso,
+			url: 'item/'+ this.uuid + '/' + codigoCurso,
 			method: 'DELETE'
 		});
 		
