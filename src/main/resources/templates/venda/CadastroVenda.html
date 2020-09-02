@@ -31,11 +31,14 @@
 			
 			<div class="row">
 				<div class="col-sm-4">
-					<div class="marajo-box">
+					<div class="marajo-box js-valor-total-box-container"><!-- Classe para alterar a cor quando negativo. -->
 						<div class="marajo-box__icon">
 							<i class="fa  fa-usd  fa-3x"></i>
 						</div>
-						<div class="marajo-box__value">R$0,00</div>
+						<!-- 4.0 Aqui será mostrado o valor Total pedido no span, para acessarmos no js através 
+						da classe de nome js-valor-total-box... de volta ao venda.js  -->
+						 
+						<div class="marajo-box__value">R$: <span class="js-valor-total-box">0,00</span></div>
 						<div class="marajo-box__title">Total</div>
 					</div>
 				</div>
@@ -77,8 +80,8 @@
 				    </div>				   
 				</div>
 				
-				<div class="form-group  col-sm-4 bw-required">
-					<label class="control-label" for="valorFrete">Valor do frete</label>
+				<div class="form-group  col-sm-4">
+					<label class="control-label" for="valorFrete">Valor do frete</label><!-- 5.0 Pegamos agora o valor do frete -->
 					<div class="input-group">
 	      				<div class="input-group-addon">R$</div> 
 						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorFrete"/>
@@ -86,9 +89,11 @@
 				</div>
 				
 				<div class="form-group  col-sm-4">
-					<label class="control-label" for="valorDesconto">Valor do desconto</label>
+					<!-- 5.1 E o valor do desconto, para somarmos e subtrairmos 
+					com o valor total através do ID... De volta ao js -->
+					<label class="control-label" for="valorDesconto">Valor do desconto</label> 
 					<div class="input-group">
-	      				<div class="input-group-addon">R$</div> 
+	      				<div class="input-group-addon">R$</div>	      				
 						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorDesconto"/>
 					</div>
 				</div>
@@ -174,6 +179,7 @@
 	<script th:src="@{/javascripts/aluno.pesquisa-rapida.js}"></script>
 	<script th:src="@{/javascripts/venda.autocomplete-itens.js}"></script>
 	<script th:src="@{/javascripts/venda.tabela-itens.js}"></script>
+	<script th:src="@{/javascripts/venda.js}"></script>
 	<script>
 	$(function() {
 		$('.js-abas-venda a').click(function (e) {

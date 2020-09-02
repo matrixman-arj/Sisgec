@@ -1,6 +1,6 @@
 package com.cursomarajoara.sisgec.session;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.cursomarajoara.sisgec.model.Curso;
-import com.cursomarajoara.sisgec.session.TabelaItensVenda;
 
 public class TabelaItensVendaTest {
 	

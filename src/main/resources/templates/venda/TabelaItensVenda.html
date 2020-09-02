@@ -7,7 +7,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />		
 	</head>
 	
-	<div class="marajo-tabela-item js-tabela-item" th:each="item : ${itens}">
+	<!--2.3.5 Inserimos esse data com o valor total que recebemos do servidor... Agora voltamos venda.tabela-itens.js -->
+	<div class="marajo-tabela-item js-tabela-item" th:each="item : ${itens}" data:valor-total="${valorTotal}">
 		<div class="marajo-tabela-item__coluna marajo-tabela-item__coluna--foto">
 			<img th:src="@{/fotos/thumbnail.{foto}(foto=${item.curso.fotoOuMock})}" class="img-responsive"/>
 		</div>

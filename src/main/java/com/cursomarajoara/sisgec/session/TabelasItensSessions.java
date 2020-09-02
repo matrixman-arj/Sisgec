@@ -36,6 +36,12 @@ public class TabelasItensSessions {
 	public List<ItemVenda> getItens(String uuid) {		
 		return buscarTabelaPorUuid(uuid).getItens();
 	}
+	
+	/*2.3.2 -> Onde nos retornará um buscar tabela por ID, pegando o valor total da tabela de itens*/
+	public Object getValorTotal(String uuid) {
+		
+		return buscarTabelaPorUuid(uuid).getValorTotal();
+	}
 
 	private TabelaItensVenda buscarTabelaPorUuid(String uuid) {
 		TabelaItensVenda tabela = tabelas.stream()
@@ -44,4 +50,5 @@ public class TabelasItensSessions {
 				.orElse(new TabelaItensVenda(uuid));
 		return tabela;
 	}
+
 }

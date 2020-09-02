@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -54,10 +53,15 @@ public class VendasController {
 		tabelaItens.excluirItem(uuid, curso);
 		return mvTabelaItensVenda(uuid);	
 	}
-
+/*2.3 -> Aqui onde está retornando a tabela de itens...  */
 	private ModelAndView mvTabelaItensVenda(String uuid) {
-		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");
+		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");/*<-2.3.4 Está sendo mandado para a tabela itens de venda .html, então vamos abri-la*/
 		mv.addObject("itens", tabelaItens.getItens(uuid));
+		
+		/*2.3.1 -> Adicionamos um objeto, colocando o valor total, 
+		 * recuperando da tabela de itens, para esse ID... 
+		 * Criamos agora esse método que ainda nãp existe, no arquivo TabelaItensSessions*/
+		mv.addObject("valorTotal", tabelaItens.getValorTotal(uuid));/*<-2.3.3 Esse valor total...*/
 		return mv;
 	}
 

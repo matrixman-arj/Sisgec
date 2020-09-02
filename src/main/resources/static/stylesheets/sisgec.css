@@ -231,6 +231,11 @@
 	padding: 0px 5px !important;
 }
 
+/* Box Vermelho quando Valor negativo*/
+.negativo .marajo-box__value {
+	color: red;
+}
+
 /* Tabela Item */
 .marajo-tabela-item {
 	position: relative; /* Para que o painel de exclusão apareça dentro da linha */

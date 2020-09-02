@@ -1,39 +1,36 @@
 var Sisgec = Sisgec || {};
 
-Sisgec.MaskMoney = (function(){
+Sisgec.MaskMoney = (function() {
 	
 	function MaskMoney() {
 		this.decimal = $('.js-decimal');
 		this.plain = $('.js-plain');
-		
 	}
 	
 	MaskMoney.prototype.enable = function() {
-		this.decimal.maskMoney({decimal: ',', thousands: '.'});
-		this.plain.maskMoney({ precision: 0, thousands: '.' });		
-		
+		this.decimal.maskMoney({ decimal: ',', thousands: '.' });
+		this.plain.maskMoney({ precision: 0, thousands: '.' });
 	}
 	
-	return MaskMoney
+	return MaskMoney;
 	
 }());
 
-Sisgec.MaskPhoneNumber = (function(){
+Sisgec.MaskPhoneNumber = (function() {
 	
-	function MaskPhoneNumber(){
+	function MaskPhoneNumber() {
 		this.inputPhoneNumber = $('.js-phone-number');
-		
 	}
 	
-	MaskPhoneNumber.prototype.enable = function(){		
-		var maskBehavior = function (val){
-			return val.replace(/\D/g,'').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+	MaskPhoneNumber.prototype.enable = function() {
+		var maskBehavior = function (val) {
+		  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 		};
 		
 		var options = {
-			onKeyPress: function(val, e, field, options) {
-				field.mask(maskBehavior.apply({}, arguments), options);
-			}
+		  onKeyPress: function(val, e, field, options) {
+		      field.mask(maskBehavior.apply({}, arguments), options);
+		    }
 		};
 		
 		this.inputPhoneNumber.mask(maskBehavior, options);
@@ -43,22 +40,21 @@ Sisgec.MaskPhoneNumber = (function(){
 	
 }());
 
-Sisgec.MaskCepNumber = (function() {
+Sisgec.MaskCep = (function() {
 	
-	function MaskCepNumber() {
-		this.inputCepNumber = $('.js-cep-number');
-		
+	function MaskCep() {
+		this.inputCep = $('.js-cep');
 	}
 	
-	MaskCepNumber.prototype.enable = function() {
-		this.inputCepNumber.mask('00.000-000');
+	MaskCep.prototype.enable = function() {
+		this.inputCep.mask('00.000-000');
 	}
 	
-	return MaskCepNumber;
+	return MaskCep;
 	
 }());
 
-Sisgec.MaskDate = (function(){
+Sisgec.MaskDate = (function() {
 	
 	function MaskDate() {
 		this.inputDate = $('.js-date');
@@ -85,17 +81,23 @@ Sisgec.Security = (function() {
 	}
 	
 	Security.prototype.enable = function() {
-		$(document).ajaxSend(function(event, jqxhr, settings){
+		$(document).ajaxSend(function(event, jqxhr, settings) {
 			jqxhr.setRequestHeader(this.header, this.token);
 		}.bind(this));
 	}
 	
 	return Security;
+	
 }());
 
+numeral.language('pt-br');
+
 Sisgec.formatarMoeda = function(valor) {
-//	numeral.language('pt-br');
 	return numeral(valor).format('0,0.00');
+}
+
+Sisgec.recuperarValor = function(valorFormatado) {
+	return numeral().unformat(valorFormatado);
 }
 
 $(function() {
@@ -105,12 +107,13 @@ $(function() {
 	var maskPhoneNumber = new Sisgec.MaskPhoneNumber();
 	maskPhoneNumber.enable();
 	
-	var maskCepNumber = new Sisgec.MaskCepNumber();
-	maskCepNumber.enable();
+	var maskCep = new Sisgec.MaskCep();
+	maskCep.enable();
 	
 	var maskDate = new Sisgec.MaskDate();
 	maskDate.enable();
 	
 	var security = new Sisgec.Security();
 	security.enable();
-}); 
+	
+});
