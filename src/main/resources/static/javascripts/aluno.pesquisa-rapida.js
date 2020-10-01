@@ -68,8 +68,8 @@ Sisgec.TabelaAlunoPesquisaRapida = (function(){
 		this.modalAluno.modal('hide');
 		
 		var alunoSelecionado = $(evento.currentTarget);
-		$('#nomeCliente').val(alunoSelecionado.data('nome'));
-		$('#codigoCliente').val(alunoSelecionado.data('codigo'));
+		$('#nomeAluno').val(alunoSelecionado.data('nome'));
+		$('#codigoAluno').val(alunoSelecionado.data('codigo'));
 	}
 	
 	return TabelaAlunoPesquisaRapida;
