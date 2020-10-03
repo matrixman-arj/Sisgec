@@ -40,7 +40,7 @@
 						<!-- 4.0 Aqui será mostrado o valor Total pedido no span, para acessarmos no js através 
 						da classe de nome js-valor-total-box... de volta ao venda.js  -->
 						 
-						<div class="marajo-box__value">R$: <span class="js-valor-total-box">0,00</span></div>
+						<div class="marajo-box__value">R$: <span class="js-valor-total-box" th:text="${{venda.valorTotal}}">0,00</span></div>
 						<div class="marajo-box__title">Total</div>
 					</div>
 				</div>
@@ -69,10 +69,11 @@
 			</div>
 
 			<div class="row">
-				<div class="form-group  col-sm-4  marajo-required">
+				<div class="form-group  col-sm-4  sisgec-required" sisgec:classforerror="aluno.codigo">
 					<label class="control-label" for="nomeAluno">Aluno</label>
 					<div class="input-group">
-				      <input id="nomeAluno" type="text" readonly="readonly" class="form-control" placeholder="Clique na lupa para pesquisar o aluno"/>
+				      <input id="nomeAluno" type="text" readonly="readonly" class="form-control" th:field="*{aluno.nome}"
+				      	placeholder="Clique na lupa para pesquisar o aluno"/>
 				      <input id="codigoAluno" type="hidden" th:field="*{aluno}"/>
 				      <span class="input-group-btn">
 				        <button class="btn  btn-default  js-tooltip" type="button" title="Pesquisa avançada" 
@@ -87,7 +88,7 @@
 					<label class="control-label" for="valorFrete">Valor do frete</label><!-- 5.0 Pegamos agora o valor do frete -->
 					<div class="input-group">
 	      				<div class="input-group-addon">R$</div> 
-						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorFrete" th:field="*{valorFrete}"/>
+						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorFrete" th:field="*{valorFrete}" data:valor="${valorFrete}"/>
 					</div>
 				</div>
 				
@@ -97,7 +98,7 @@
 					<label class="control-label" for="valorDesconto">Valor do desconto</label> 
 					<div class="input-group">
 	      				<div class="input-group-addon">R$</div>	      				
-						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorDesconto" th:field="*{valorDesconto}"/>
+						<input type="text" maxlength="14" class="form-control  js-decimal" id="valorDesconto" th:field="*{valorDesconto}" data:valor="${valorDesconto}"/>
 					</div>
 				</div>
 			</div>
@@ -122,17 +123,14 @@
 						</div>
 					</div>
 					
-					<div class="marajo-tabela-cursos js-tabela-cursos-container">											
-						<div class="marajo-tabela-cursos__vazio">
-							<i class="glyphicon  glyphicon-shopping-cart"></i> 
-							<span>Você ainda não adicionou nenhum curso ou produto.</span>
-						</div>
+					<div class="marajo-tabela-cursos js-tabela-cursos-container" data:valor="${valorTotalItens}">											
+						<th:block th:replace="venda/TabelaItensVenda"/>
 					</div>
 				</div>
 				
 				<div class="tab-pane" id="entrega">
 					<div class="row">
-						<div class="form-group  col-sm-3">
+						<div class="form-group  col-sm-3" sisgec:classforerror="dataEntrega">
 							<label class="control-label" for="dataEntrega">Data da entrega</label>
 							<input type="text" class="form-control" id="dataEntrega" th:field="*{dataEntrega}"/>
 						</div>

@@ -2,6 +2,7 @@ package com.cursomarajoara.sisgec.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +23,14 @@ public class CadastroVendaService {
 	public void salvar(Venda venda) {
 		if (venda.isNova()) {
 			venda.setDataCriacao(LocalDateTime.now());
-		}
-		
-		BigDecimal valorTotalItens = venda.getItens().stream()
-				.map(ItemVenda::getValorTotal)
-				.reduce(BigDecimal::add)
-				.get();
-		BigDecimal valorTotal = calcularValorTotal(valorTotalItens, venda.getValorFrete(), venda.getValorDesconto());
-		venda.setValorTotal(valorTotal);
+		}		
 		
 		if (venda.getDataEntrega() != null) {
-			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega(), venda.getHorarioEntrega()));
+			venda.setDataHoraEntrega(LocalDateTime.of(venda.getDataEntrega()
+					, venda.getHorarioEntrega() != null ? venda.getHorarioEntrega() : LocalTime.NOON));
 		}
 		
 		vendas.save(venda);
 	}
-
-	private BigDecimal calcularValorTotal(BigDecimal valorTotalItens, BigDecimal valorFrete, BigDecimal valorDesconto) {
-		BigDecimal valorTotal = valorTotalItens
-				.add(Optional.ofNullable(valorFrete).orElse(BigDecimal.ZERO))
-				.subtract(Optional.ofNullable(valorDesconto).orElse(BigDecimal.ZERO));
-		return valorTotal;
-	}
-
+	
 }
