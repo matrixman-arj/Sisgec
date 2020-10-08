@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cursomarajoara.sisgec.enuns.StatusVenda;
 import com.cursomarajoara.sisgec.model.ItemVenda;
 import com.cursomarajoara.sisgec.model.Venda;
 import com.cursomarajoara.sisgec.repository.Vendas;
@@ -31,6 +32,13 @@ public class CadastroVendaService {
 		}
 		
 		vendas.save(venda);
+	}
+	
+	@Transactional
+	public void emitir(Venda venda) {
+		venda.setStatus(StatusVenda.EMITIDA);
+		salvar(venda);
+		
 	}
 	
 }
