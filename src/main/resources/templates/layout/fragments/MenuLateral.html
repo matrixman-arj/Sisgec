@@ -20,9 +20,13 @@
             			<i class="marajo-menu__navigation-icon  fa"></i>
           			</a>
       
-          			<ul class="marajo-menu__list  sisgec-menu__list--sublist">
-			            <li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas}">
-			            	<a th:href="@{/vendas/nova}">Nova venda</a>
+          			<ul class="marajo-menu__list  sisgec-menu__list--sublist">          			
+          				<li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas/nova}">
+			            	<a th:href="@{/vendas/nova}">Nova venda</a>			            	
+			            </li>
+          			
+			            <li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas}">			            	
+			            	<a th:href="@{/vendas}">Pesquisa de vendas</a>
 			            </li>
 			        </ul>
 			    </li>
@@ -34,11 +38,11 @@
 		          </a>
 		      
 		          <ul class="marajo-menu__list  marajo-menu__list--sublist">
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/tipos}">
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/tipos.*}">
 		            	<a th:href="@{/tipos}">Tipos</a>
 		            </li>
 		            
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/cursos}">
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/cursos.*}">
 		            	<a th:href="@{/cursos}">Cursos</a>
 		            </li>
 		          </ul>
@@ -51,15 +55,15 @@
 		          </a>
 		
 		          <ul class="marajo-menu__list  marajo-menu__list--sublist">
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/cidades}">
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/cidades.*}">
 		            	<a th:href="@{/cidades}">Cidades</a>
 		            </li>
 		            
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/alunos}">
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/alunos.*}">
 		            	<a th:href="@{/alunos}">Alunos</a>
 		            </li>
 		            
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/usuarios}">
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/usuarios.*}">
 		            	<a th:href="@{/usuarios/novo}">Usuários</a>
 		            </li>
 		            
