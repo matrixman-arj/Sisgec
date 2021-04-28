@@ -178,6 +178,10 @@ public class Curso implements Serializable {
 		return !StringUtils.isEmpty(foto) ? foto : "foto-mock.png";
 	}
 	
+	public boolean temFoto() {
+		return !StringUtils.isEmpty(this.foto);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

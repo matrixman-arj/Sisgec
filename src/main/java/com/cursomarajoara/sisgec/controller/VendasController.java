@@ -26,6 +26,7 @@ import com.cursomarajoara.sisgec.controller.page.PageWrapper;
 import com.cursomarajoara.sisgec.controller.validator.VendaValidator;
 import com.cursomarajoara.sisgec.enuns.StatusVenda;
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
+import com.cursomarajoara.sisgec.mail.Mailer;
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.model.Venda;
 import com.cursomarajoara.sisgec.repository.Cursos;
@@ -53,6 +54,9 @@ public class VendasController {
 	
 	@Autowired
 	private Vendas vendas;
+	
+	@Autowired
+	private Mailer mailer;
 	
 	@InitBinder("venda")
 	public void inicializarValidador(WebDataBinder binder) {
@@ -113,8 +117,10 @@ public class VendasController {
 		
 		venda.setUsuario(usuarioSistema.getUsuario());
 		
-		cadastroVendaService.salvar(venda);
-		attributes.addFlashAttribute("mensagem", "Venda salva e e-mail enviado!");
+		venda = cadastroVendaService.salvar(venda);
+		mailer.enviar(venda);
+				
+		attributes.addFlashAttribute("mensagem", String.format("Matricula de nº %d salva com sucesso e e-mail enviado!", venda.getCodigo()));
 		return new ModelAndView("redirect:/vendas/nova");
 	}
 	
