@@ -60,8 +60,8 @@ public class CursosController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/novo", method = RequestMethod.POST )
-	public ModelAndView  cadastrar(@Valid Curso curso, BindingResult result, Model model, RedirectAttributes attributes) {
+	@RequestMapping(value = {"/novo", "{\\d+}" }, method = RequestMethod.POST )
+	public ModelAndView  salvar(@Valid Curso curso, BindingResult result, Model model, RedirectAttributes attributes) {
 		if(result.hasErrors()) {			
 			return novo(curso);
 		}		
@@ -100,5 +100,12 @@ public class CursosController {
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 		return ResponseEntity.ok().build();	
+	}
+	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable("codigo") Curso curso) {
+		ModelAndView mv = novo(curso);
+		mv.addObject(curso);
+		return mv;
 	}
 }

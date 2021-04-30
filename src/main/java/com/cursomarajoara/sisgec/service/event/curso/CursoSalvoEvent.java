@@ -19,5 +19,9 @@ public class CursoSalvoEvent {
 	public boolean temFoto() {
 		return !StringUtils.isEmpty(curso.getFoto());
 	}
+	
+	public boolean isNovaFoto() {
+		return curso.isNovaFoto();
+	}
 
 }

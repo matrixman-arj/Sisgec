@@ -1,13 +1,14 @@
 var Sisgec = Sisgec || {};
 
-Sisgec.UploadFoto = (function(){
+Sisgec.UploadFoto = (function() {
 	
 	function UploadFoto() {
 		this.inputNomeFoto = $('input[name=foto]');
 		this.inputContentType = $('input[name=contentType]');
+		this.novaFoto = $('input[name=novaFoto]');
 		
 		this.htmlFotoCursoTemplate = $('#foto-curso').html();
-		this.template = Handlebars.compile(this.htmlFotoCursoTemplate);		
+		this.template = Handlebars.compile(this.htmlFotoCursoTemplate);
 		
 		this.containerFotoCurso = $('.js-container-foto-curso');
 		
@@ -16,29 +17,40 @@ Sisgec.UploadFoto = (function(){
 	
 	UploadFoto.prototype.iniciar = function () {
 		var settings = {
-				type: 'json',
-				filelimit: 1,
-				allow: '*.(jpg|jpeg|png)',
-				action: this.containerFotoCurso.data('url-fotos'),
-				complete: onUploadCompleto.bind(this),
-				beforeSend: adicionarCsrfToken
+			type: 'json',
+			filelimit: 1,
+			allow: '*.(jpg|jpeg|png)',
+			action: this.containerFotoCurso.data('url-fotos'),
+			complete: onUploadCompleto.bind(this),
+			beforeSend: adicionarCsrfToken
 		}
 		
 		UIkit.uploadSelect($('#upload-select'), settings);
 		UIkit.uploadDrop(this.uploadDrop, settings);
 		
 		if (this.inputNomeFoto.val()) {
-			onUploadCompleto.call(this, {nome: this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
+			renderizarFoto.call(this, { nome:  this.inputNomeFoto.val(), contentType: this.inputContentType.val()});
 		}
-		
 	}
 	
 	function onUploadCompleto(resposta) {
+		this.novaFoto.val('true');
+		renderizarFoto.call(this, resposta);
+	}
+	
+	function renderizarFoto(resposta) {
 		this.inputNomeFoto.val(resposta.nome);
 		this.inputContentType.val(resposta.contentType);
 		
 		this.uploadDrop.addClass('hidden');
-		var htmlFotoCurso = this.template({nomeFoto: resposta.nome});
+		
+		var foto = '';
+		if (this.novaFoto.val() == 'true') {
+			foto = 'temp/';
+		}
+		foto += resposta.nome;
+		
+		var htmlFotoCurso = this.template({foto: foto});
 		this.containerFotoCurso.append(htmlFotoCurso);
 		
 		$('.js-remove-foto').on('click', onRemoverFoto.bind(this));
@@ -49,6 +61,7 @@ Sisgec.UploadFoto = (function(){
 		this.uploadDrop.removeClass('hidden');
 		this.inputNomeFoto.val('');
 		this.inputContentType.val('');
+		this.novaFoto.val('false');
 	}
 	
 	function adicionarCsrfToken(xhr) {
@@ -61,7 +74,7 @@ Sisgec.UploadFoto = (function(){
 	
 })();
 
-$(function(){
+$(function() {
 	var uploadFoto = new Sisgec.UploadFoto();
-	uploadFoto.iniciar();	
+	uploadFoto.iniciar();
 });
