@@ -1,11 +1,16 @@
 Sisgec = Sisgec || {};
 
+/** Aqui criamos um modal panel, que é uma função só que é uma função que já começa sendo executada e, 
+    dentro dela, vamos colocando nossas variáveis e funções privadas.
+*/
 Sisgec.DialogoExcluir = (function() {
 	
+	/**Aqui está uma função privada, que será chamada, ao clicar no botão excluir*/
 	function DialogoExcluir() {
-		this.exclusaoBtn = $('.js-exclusao-btn')
+		this.exclusaoBtn = $('.js-exclusao-btn')/** O this significa que estamos falando desse exclusaoBtn pois podem existir outros */
 	}
 	
+	/** Aqui significa que quando o modal panel for iniciado e nós chamarmos o iniciar, seja executado o que está dentro dela */
 	DialogoExcluir.prototype.iniciar = function() {
 		this.exclusaoBtn.on('click', onExcluirClicado.bind(this));
 		
@@ -31,6 +36,7 @@ Sisgec.DialogoExcluir = (function() {
 	}
 	
 	function onExcluirConfirmado(url) {
+		
 		$.ajax({
 			url: url,
 			method: 'DELETE',

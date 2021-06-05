@@ -18,11 +18,10 @@
 		<div class="container-fluid">		
 			<div class="row">
 			
-				<div class="col-sm-10">			
-					<p>Cadastro de aluno</p>
-				</div>
-				
-			
+				<div class="col-sm-10">
+					<p th:if="${aluno.novo}">Cadastro de usuário</p>
+					<p th:unless="${aluno.novo}">Edição de aluno - [[${aluno.nome}]]</p>
+				</div>			
 			
 				<div class="col-sm-2">
 				
@@ -45,8 +44,11 @@
 				<i class="fa  fa-exclamation-circle"></i> Já existe um aluno com o nome informado.
 		</div> -->
 	
-		<form method="POST" th:object="${aluno}" th:action="@{/alunos/novo}">		
+		<form method="POST" th:object="${aluno}" 
+			th:action="${aluno.novo} ? @{/alunos/novo} : @{/alunos/{codigo}(codigo=${aluno.codigo})}">		
 			<sisgec:message/>
+			
+			<input  type="hidden" th:field="*{codigo}">
 		
 			<div class="row">
 			
@@ -98,7 +100,7 @@
 				
 				<div class="form-group  col-sm-2 sisgec-required">
 					<label for="dataNascimento" class="control-label">Data de nascimento</label>
-					<input type="text" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"/>
+					<input type="text" class="form-control js-date" id="dataNascimento" th:field="*{dataNascimento}"/>
 				</div>
 				
 			</div>

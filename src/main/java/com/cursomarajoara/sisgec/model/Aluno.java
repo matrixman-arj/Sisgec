@@ -165,6 +165,10 @@ public class Aluno implements Serializable{
 		return TipoPessoa.removerFormatacao(this.docReceita);
 	}
 	
+	public boolean isNovo() {
+		return codigo == null;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

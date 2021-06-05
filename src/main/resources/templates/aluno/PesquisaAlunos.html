@@ -56,14 +56,11 @@
 						<th class="table-alunos-col-nome">
 							<sisgec:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
-						<th class="table-alunos-col-tipoPessoa">
-							<!--<field="tipoPessoa" text="Tipo Pessoa"/> -->
-						</th>
-						
+						<th class="table-alunos-col-tipoPessoa">Tipo de pessoa</th>						
 						<th class="table-alunos-col-docReceita">CPF/CNPJ</th>
 						<th class="table-alunos-col-telefone">Telefone</th>
 						<th class="table-alunos-col-cidade-estado">Cidade/Estado</th>							
-						<th class="table-cursos-col-acoes"></th>
+						<th class="table-cursos-col-acoes">Ações</th>
 					</tr>			
 				</thead>
 				<tbody>
@@ -73,15 +70,19 @@
 <!-- 						</td> -->
 						<td th:text="${aluno.nome}">Vanilton</td>
 						<td class="text-center" th:text="${aluno.tipoPessoa.descricao}">FISICA</td>
-						<td class="text-right" th:text="${aluno.docReceita}">011.123.321-14</td>
-						<td class="text-right" th:text="${aluno.telefone}"></td>
-						<td class="text-right" th:text="${aluno.endereco.nomeCidadeSiglaEstado}"></td>												
-						<td class="text-center">
-							<a class="btn btn-link btn-xs" title="Editar">
+						<td class="text-center" th:text="${aluno.docReceita}">011.123.321-14</td>
+						<td class="text-center" th:text="${aluno.telefone}"></td>
+						<td class="text-center" th:text="${aluno.endereco.nomeCidadeSiglaEstado}"></td>												
+						<td class="text-center">						
+							<a class="btn btn-link btn-xs js-tooltip" title="Editar"
+								th:href="@{/alunos/{codigo}(codigo=${aluno.codigo})}">
 								<i class="glyphicon glyphicon-pencil"></i>
 							</a>
 							
-							<a class="btn btn-link btn-xs" title="Excluir">
+							<a class="btn btn-link btn-xs js-tooltip js-exclusao-btn" title="Excluir" href="#" 
+								data:url="@{/alunos/{codigo}(codigo=${aluno.codigo})}"
+								data:codigo="${aluno.codigo}" 
+								data:objeto="${aluno.nome}">
 								<i class="glyphicon glyphicon-remove"></i>
 							</a>
 						</td>						

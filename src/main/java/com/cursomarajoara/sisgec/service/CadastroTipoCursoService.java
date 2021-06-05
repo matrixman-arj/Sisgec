@@ -2,6 +2,8 @@ package com.cursomarajoara.sisgec.service;
 
 import java.util.Optional;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cursomarajoara.sisgec.exception.NomeTipoCursoJaCadastradoException;
 import com.cursomarajoara.sisgec.model.TipoCurso;
 import com.cursomarajoara.sisgec.repository.TiposCursos;
+import com.cursomarajoara.sisgec.service.exception.ImpossivelExcluirEntidadeException;
 
 @Service
 public class CadastroTipoCursoService {
@@ -24,5 +27,15 @@ public class CadastroTipoCursoService {
 			
 		}
 		return tiposCursos.saveAndFlush(tipoCurso);
+	}
+	
+	@Transactional
+	public void excluir(Long codigo) {
+		try {			
+			tiposCursos.delete(codigo);
+			tiposCursos.flush();			
+		} catch (PersistenceException e) {
+			throw new ImpossivelExcluirEntidadeException("Impossível apagar o tipo de curso, pois já está atrelado a um curso. ");
+		}
 	}
 }

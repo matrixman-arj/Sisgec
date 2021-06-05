@@ -13,10 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,6 +31,7 @@ import com.cursomarajoara.sisgec.repository.Estados;
 import com.cursomarajoara.sisgec.repository.filter.AlunoFilter;
 import com.cursomarajoara.sisgec.service.CadastroAlunoService;
 import com.cursomarajoara.sisgec.service.exception.CpfCnpjAlunoJaCadastradoException;
+import com.cursomarajoara.sisgec.service.exception.ImpossivelExcluirEntidadeException;
 
 @Controller
 @RequestMapping("/alunos")
@@ -51,7 +54,7 @@ public class AlunosController {
 		return mv;
 	}
 	
-	@PostMapping("/novo")
+	@RequestMapping(value = { "/novo", "{\\d+}" }, method = RequestMethod.POST)
 	public ModelAndView salvar(@Valid Aluno aluno, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(aluno);
@@ -98,4 +101,23 @@ public class AlunosController {
 	public ResponseEntity<Void> tratarIllegalArgumentException(IllegalArgumentException e){
 		return ResponseEntity.badRequest().build();
 	}
+	
+	@DeleteMapping("/{codigo}")
+	public @ResponseBody ResponseEntity<?> excluir(@PathVariable("codigo") Long codigo){
+		try {
+			cadastroAlunoService.excluir(codigo);
+				
+		} catch (ImpossivelExcluirEntidadeException e) {
+			return ResponseEntity.badRequest().body(e.getMessage());
+		}
+		return ResponseEntity.ok().build();	
+	}
+
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable ("codigo") Aluno aluno) {		
+		ModelAndView mv = novo(aluno);
+		mv.addObject(aluno);
+		return mv;
+	}
+
 }

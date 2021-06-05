@@ -1,5 +1,7 @@
 package com.cursomarajoara.sisgec.repository.filter;
 
+import java.util.List;
+
 import com.cursomarajoara.sisgec.enuns.Turno;
 import com.cursomarajoara.sisgec.model.Curso;
 import com.cursomarajoara.sisgec.model.Disciplina;
@@ -8,7 +10,7 @@ import com.cursomarajoara.sisgec.model.TipoCurso;
 public class CursoFilter {
 	
 	private String nome;	
-	private Disciplina disciplina;
+	private List<Disciplina> disciplinas;
 	private TipoCurso tipoCurso;
 	private Turno turno;
 	private Curso curso;
@@ -21,13 +23,13 @@ public class CursoFilter {
 		this.nome = nome;
 	}
 		
-	public Disciplina getDisciplina() {
-		return disciplina;
+	public List<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
-	public void setDisciplina(Disciplina disciplina) {
-		this.disciplina = disciplina;
+	public void setDisciplinas(List<Disciplina> disciplinas) {
+		this.disciplinas = disciplinas;
 	}
-	
+		
 	public TipoCurso getTipoCurso() {
 		return tipoCurso;
 	}

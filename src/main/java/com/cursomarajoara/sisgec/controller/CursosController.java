@@ -102,10 +102,15 @@ public class CursosController {
 		return ResponseEntity.ok().build();	
 	}
 	
+	
+	
 	@GetMapping("/{codigo}")
-	public ModelAndView editar(@PathVariable("codigo") Curso curso) {
+	public ModelAndView editar(@PathVariable Long codigo) {
+		Curso curso = cursos.buscarComDisciplinas(codigo);
 		ModelAndView mv = novo(curso);
 		mv.addObject(curso);
+		System.out.println(">> OBJT: " + curso);
+		System.out.println(">>" + curso.getNome());
 		return mv;
 	}
 }

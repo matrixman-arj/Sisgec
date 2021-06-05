@@ -3,7 +3,8 @@
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"	
 	  layout:decorate="~{layout/layoutPadrao}"
-	  xmlns:sisgec="http://sisgec.marajoara.com">
+	  xmlns:sisgec="http://sisgec.marajoara.com"
+	  xmlns:data="http://www.thymeleaf.org/extras/data">
 
 <head>
 	<title>Pesquisa de cursos</title>	
@@ -85,31 +86,45 @@
 <!-- 						<option th:each="disciplina : ${disciplinas}" th:text="${disciplina.nome}" th:value="${disciplina.codigo}"></option> -->
 <!-- 					</select>								 -->
 <!-- 				</div>	 -->
-			
-				<div class="form-group col-sm-12">
-						<label class="control-label">Disciplina</label>
-						<div>
-							<th:block th:each="disciplina : ${disciplinas}">
-								<div class="radio radio-inline">
-									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina.codigo}" th:field="*{disciplina}"/>
-									<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label>
-								</div>
-							</th:block>
-							<div class="radio radio-inline">
-								<input id="todasDisciplinas" type="radio" th:checked="*{disciplina} == null" name="disciplina"/>
-								<label for="todasDisciplinas">Todas</label>
-							</div>																
-						</div>					
+
+				
+				<div class="form-group  col-sm-12">
+					<label class="control-label">Disciplinas</label> 
+					<div>
+						<th:block th:each="disciplina : ${disciplinas}">
+	  						<div class="checkbox  checkbox-inline"> 
+		    					<input type="checkbox" th:value="${disciplina.codigo}" th:field="*{disciplinas}"/>
+		    					<label th:for="${#ids.prev('disciplinas')}" th:text="${disciplina.nome}">Farma</label>
+	    					</div>
+	    				</th:block>
 					</div>
+  				</div>
+				
+			
+<!-- 				<div class="form-group col-sm-12"> -->
+<!-- 						<label class="control-label">Disciplina</label> -->
+<!-- 						<div> -->
+<!-- 							<th:block th:each="disciplina : ${disciplinas}"> -->
+<!-- 								<div class="radio radio-inline"> -->
+<!-- 									<input th:id="|id_${disciplina}|" type="radio" th:value="${disciplina.codigo}" th:field="*{disciplina}"/> -->
+<!-- 									<label th:for="|id_${disciplina}|" th:text="${disciplina.nome}" class="control-label">Farma</label> -->
+<!-- 								</div> -->
+<!-- 							</th:block> -->
+<!-- 							<div class="radio radio-inline"> -->
+<!-- 								<input id="todasDisciplinas" type="radio" th:checked="*{disciplina} == null" name="disciplina"/> -->
+<!-- 								<label for="todasDisciplinas">Todas</label> -->
+<!-- 							</div>																 -->
+<!-- 						</div>					 -->
+<!-- 					</div> -->
 				</div>
 				<button type="submit" class="btn btn-primary">Pesquisar</button>
 		
 		</form>
-		<div class="table-responsive sisgec-tabela-simples">
+		<div class="table-responsive marajo-tabela-simples">
 			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th class="table-cursos-col-foto"></th>
+						<th class="table-cursos-col-foto">Foto</th>
 						<th class="table-cursos-col-nome">
 							<sisgec:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
@@ -120,7 +135,7 @@
 						<th class="table-cursos-col-descricao">Descrição</th>
 						<th class="table-cursos-col-turno">Turno</th>
 						<th class="table-cursos-col-disciplina">Disciplina</th>
-						<th class="table-cursos-col-acoes"></th>
+						<th class="table-cursos-col-acoes">Ações</th>
 					</tr>			
 				</thead>
 				<tbody>
@@ -132,7 +147,10 @@
 						<td th:text="${curso.tipoCurso.nome}"></td>
 						<td th:text="${curso.descricao}">Curso de Enfermagem</td>
 						<td th:text="${curso.turno}"></td>
-<!-- 						<td th:text="${curso.disciplina.nome}"></td> -->
+						<td>
+							<span th:each="disciplina : ${curso.disciplinas}" th:text="|${disciplina.nome}${disciplinaStat.last ? '' : ', '}|"></span>
+						</td>
+						
 						<td class="text-center">
 							<a class="btn btn-link btn-xs" title="Editar" 
 									th:href="@{/cursos/{codigo}(codigo=${curso.codigo})}">

@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -67,7 +66,7 @@ public class Curso implements Serializable {
 	
 
 	@Size(min = 1, message = " Selecione pelo menos uma disciplina")
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
 	@JoinTable(name = "curso_disciplina", joinColumns = @JoinColumn(name = "codigo_curso")
 				, inverseJoinColumns = @JoinColumn(name = "codigo_disciplina"))	
 	private List<Disciplina> disciplinas;

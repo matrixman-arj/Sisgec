@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
+import com.cursomarajoara.sisgec.model.Usuario;
 import com.cursomarajoara.sisgec.model.Venda;
 import com.cursomarajoara.sisgec.repository.filter.VendaFilter;
 import com.cursomarajoara.sisgec.repository.paginacao.PaginacaoUtil;
@@ -41,6 +43,17 @@ public class VendasImpl implements VendasQueries {
 		
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Venda buscarComItens(Long codigo) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
+		criteria.createAlias("itens", "i", JoinType.LEFT_OUTER_JOIN);
+		criteria.add(Restrictions.eq("codigo", codigo));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return (Venda) criteria.uniqueResult();
+	}
+
 	
 	private Long total(VendaFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Venda.class);
@@ -88,5 +101,5 @@ public class VendasImpl implements VendasQueries {
 			}
 		}
 	}
-
+	
 }

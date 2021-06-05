@@ -70,6 +70,7 @@
     margin-left: -211px;
   }
 }
+
 .marajo-layout-sidebar__content {
   position: relative;
   overflow-y: auto;
@@ -626,10 +627,12 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  text-align:center;
   margin: 0;
   height: 80px;
   color: #333333;
 }
+
 .marajo-page-header-controls {
   display: flex;
   justify-content: flex-end;
@@ -639,4 +642,16 @@ body {
 .marajo-checkbox-no-margin {
   margin-top: 0px !important;
   margin-bottom: 0px !important;
+}
+
+/* Tabela Simples*/
+.marajo-tabela-simples tabela tr th {
+	border-bottom-width: 1px;
+}
+
+.marajo-tabela-simples tabela tr td {
+	border-top: none;
+	border-bottom: 1px solid #e7eaec;
+	padding: 10px;
+	vertical-align: middle;
 }

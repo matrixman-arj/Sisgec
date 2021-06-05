@@ -1,5 +1,6 @@
 package com.cursomarajoara.sisgec.controller;
 
+
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -28,6 +30,7 @@ import com.cursomarajoara.sisgec.enuns.StatusVenda;
 import com.cursomarajoara.sisgec.enuns.TipoPessoa;
 import com.cursomarajoara.sisgec.mail.Mailer;
 import com.cursomarajoara.sisgec.model.Curso;
+import com.cursomarajoara.sisgec.model.ItemVenda;
 import com.cursomarajoara.sisgec.model.Venda;
 import com.cursomarajoara.sisgec.repository.Cursos;
 import com.cursomarajoara.sisgec.repository.Vendas;
@@ -65,11 +68,9 @@ public class VendasController {
 	
 	@GetMapping("/nova")
 	public ModelAndView nova(Venda venda) {
-		ModelAndView mv = new ModelAndView("venda/CadastroVenda");
+		ModelAndView mv = new ModelAndView("venda/CadastroVenda");		
 		
-		if(StringUtils.isEmpty(venda.getUuid())) {
-			venda.setUuid(UUID.randomUUID().toString());
-		}
+		setUuid(venda);
 		
 		mv.addObject("itens", venda.getItens());
 		mv.addObject("valorFrete", venda.getValorFrete());
@@ -147,7 +148,7 @@ public class VendasController {
 	
 	@GetMapping
 	public ModelAndView pesquisar(VendaFilter vendaFilter,
-			@PageableDefault(size = 3) Pageable pageable, HttpServletRequest httpServletRequest) {
+			@PageableDefault(size = 10) Pageable pageable, HttpServletRequest httpServletRequest) {
 		ModelAndView mv = new ModelAndView("/venda/PesquisaVendas");
 		mv.addObject("todosStatus", StatusVenda.values());
 		mv.addObject("tiposPessoa", TipoPessoa.values());
@@ -158,6 +159,33 @@ public class VendasController {
 		return mv;
 	}
 	
+	@GetMapping("/{codigo}")
+	public ModelAndView editar(@PathVariable Long codigo) {
+		Venda venda = vendas.buscarComItens(codigo);
+		
+		setUuid(venda);
+		for (ItemVenda item : venda.getItens()) {
+			tabelaItens.adicionarItem(venda.getUuid(), item.getCurso(), item.getQuantidade());
+		}
+		
+		ModelAndView mv = nova(venda);
+		mv.addObject(venda);
+		return mv;
+	}
+	
+	@PostMapping(value = "/nova", params = "cancelar")
+	public ModelAndView cancelar(Venda venda, BindingResult result, RedirectAttributes attributes, @AuthenticationPrincipal UsuarioSistema usuarioSistema) {
+		
+		try {
+			cadastroVendaService.cancelar(venda);
+		} catch (AccessDeniedException e) {
+			return new ModelAndView("/403");
+		}
+		
+		attributes.addFlashAttribute("mensagem", "Venda cancelada com sucesso");
+		return new ModelAndView("redirect:/vendas/" + venda.getCodigo());
+	
+	}
 /*2.3 -> Aqui onde está retornando a tabela de itens...  */
 	private ModelAndView mvTabelaItensVenda(String uuid) {
 		ModelAndView mv = new ModelAndView("venda/TabelaItensVenda");/*<-2.3.4 Está sendo mandado para a tabela itens de venda .html, então vamos abri-la*/
@@ -175,6 +203,12 @@ public class VendasController {
 		venda.calcularValorTotal();
 		
 		vendaValidator.validate(venda, result);
+	}
+	
+	private void setUuid(Venda venda) {
+		if(StringUtils.isEmpty(venda.getUuid())) {
+			venda.setUuid(UUID.randomUUID().toString());
+		}
 	}
 
 }

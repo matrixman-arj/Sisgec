@@ -7,4 +7,6 @@ import com.cursomarajoara.sisgec.repository.helper.venda.VendasQueries;
 
 public interface Vendas extends JpaRepository<Venda, Long>, VendasQueries {
 
+
+
 }

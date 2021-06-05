@@ -22,13 +22,14 @@
 			<div  class="marajo-tabela-curso-valor-pequeno">
 				<input type="text" maxlength="3" 
 					class="marajo-tabela-curso-campo-quantidade js-tabela-curso-quantidade-item" 
-					th:value="${item.quantidade}" data:codigo-curso="${item.curso.codigo}"/>
+					th:value="${item.quantidade}" data:codigo-curso="${item.curso.codigo}" 
+					th:disabled="${venda != null ? venda.salvarProibido : false}"/>
 				<span>x R$[[${{item.valorUnitario}}]]</span>
 			</div>
 			<div  class="marajo-tabela-curso-valor-grande">R$[[${{item.valorTotal}}]]</div>								
 		</div>
 		
-		<div class="marajo-tabela-item__painel-exclusao">
+		<div class="marajo-tabela-item__painel-exclusao" th:if="${venda != null ? venda.salvarPermitido : false}">
 			<span class="marajo-tabela-item__titulo-exclusao">Excluir este item da venda?</span>
 			<button type="button" class="btn  btn-danger js-exclusao-item-btn" 
 				data:codigo-curso="${item.curso.codigo}">Sim, excluir!</button>

@@ -14,5 +14,7 @@ public interface CursosQueries {
 	public Page<Curso> filtrar(CursoFilter filtro, Pageable pageable);
 	
 	public List<CursoDTO> porSkuOuNome(String skuOuNome);
+	
+	public Curso buscarComDisciplinas(Long codigo);
 
 }

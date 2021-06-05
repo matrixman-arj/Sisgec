@@ -1,13 +1,11 @@
 package com.cursomarajoara.sisgec.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -25,10 +23,7 @@ public class TipoCurso implements Serializable {
 	
 	@NotBlank(message = " O campo nome é obrigatório!")
 	private String nome;	
-	
-	@OneToMany(mappedBy = "tipoCurso")
-	private List<Curso> cursos;
-	
+			
 	@NotBlank(message = " O campo descrição é obrigatório!")
 	@Size(min = 1, max = 50, message = " O tamanho do campo descrição deve estar entre 1 e 50")
 	private String descricao;	
@@ -47,19 +42,17 @@ public class TipoCurso implements Serializable {
 		this.nome = nome;
 	}
 		
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}	
-	
 	public String getDescricao() {
 		return descricao;
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public boolean isNovo() {
+		return codigo == null;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

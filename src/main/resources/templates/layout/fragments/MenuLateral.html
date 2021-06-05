@@ -2,14 +2,15 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sisgec="http://sisgec.cursomarajoara.com">
+	  
 <body>
-<aside class="marajo-layout-sidebar  js-sidebar" th:fragment="aside">
+<aside class="marajo-layout-sidebar  js-sidebar" th:fragment="sidebar">
 		<div class="marajo-layout-sidebar__content">
 		
 		    <nav class="marajo-menu  js-menu">
 		      <ul class="marajo-menu__list">
 		
-		        <li class="marajo-menu__item">          
+		        <li class="marajo-menu__item" sisgec:menu="@{/}">          
 		          <a href="dashboard.html"><i class="fa  fa-fw"></i><span></span></a>
 		          <a href="dashboard.html"><i class="fa  fa-fw  fa-home"></i><span>Dashboard</span></a>
 		        </li>
@@ -20,12 +21,12 @@
             			<i class="marajo-menu__navigation-icon  fa"></i>
           			</a>
       
-          			<ul class="marajo-menu__list  sisgec-menu__list--sublist">          			
-          				<li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas/nova}">
-			            	<a th:href="@{/vendas/nova}">Nova venda</a>			            	
+          			<ul class="marajo-menu__list  marajo-menu__list--sublist">          			
+          				<li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas.+}">
+			            	<a th:href="@{/vendas/nova}">Cadastro de venda</a>			            	
 			            </li>
           			
-			            <li class="marajo-menu__item  sisgec-menu__item--link" sisgec:menu="@{/vendas}">			            	
+			            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/vendas}">			            	
 			            	<a th:href="@{/vendas}">Pesquisa de vendas</a>
 			            </li>
 			        </ul>
@@ -38,8 +39,8 @@
 		          </a>
 		      
 		          <ul class="marajo-menu__list  marajo-menu__list--sublist">
-		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/tipos.*}">
-		            	<a th:href="@{/tipos}">Tipos</a>
+		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/tiposCursos.*}">
+		            	<a th:href="@{/tiposCursos}">Tipos</a>
 		            </li>
 		            
 		            <li class="marajo-menu__item  marajo-menu__item--link" sisgec:menu="@{/cursos.*}">
@@ -71,9 +72,9 @@
 		        </li>
 		
 		      </ul>
-		    </nav>
+		 </nav>
 		
-		</div>
-	</aside>
+	</div>
+</aside>
 </body>
 </html>

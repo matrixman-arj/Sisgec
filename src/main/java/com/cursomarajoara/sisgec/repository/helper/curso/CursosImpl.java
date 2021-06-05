@@ -1,5 +1,6 @@
 package com.cursomarajoara.sisgec.repository.helper.curso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -7,9 +8,13 @@ import javax.persistence.PersistenceContext;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.Subqueries;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,6 +24,8 @@ import org.springframework.util.StringUtils;
 
 import com.cursomarajoara.sisgec.dto.CursoDTO;
 import com.cursomarajoara.sisgec.model.Curso;
+import com.cursomarajoara.sisgec.model.CursoDisciplina;
+import com.cursomarajoara.sisgec.model.Disciplina;
 import com.cursomarajoara.sisgec.repository.filter.CursoFilter;
 import com.cursomarajoara.sisgec.repository.paginacao.PaginacaoUtil;
 
@@ -38,6 +45,8 @@ public class CursosImpl implements CursosQueries {
 		
 		paginacaoUtil.preparar(criteria, pageable);
 		
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		
 		adicionarFiltro(filtro, criteria);
 		
 		return new PageImpl<>(criteria.list(), pageable, total(filtro));
@@ -49,6 +58,16 @@ public class CursosImpl implements CursosQueries {
 		criteria.setProjection(Projections.rowCount());
 		return (Long)criteria.uniqueResult();
 	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Curso buscarComDisciplinas(Long codigo) {
+		Criteria criteria = manager.unwrap(Session.class).createCriteria(Curso.class);
+		criteria.createAlias("disciplinas", "d", JoinType.LEFT_OUTER_JOIN);
+		criteria.add(Restrictions.eq("codigo", codigo));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		return (Curso) criteria.uniqueResult();
+	}
 
 
 	private void adicionarFiltro(CursoFilter filtro, Criteria criteria) {
@@ -58,8 +77,21 @@ public class CursosImpl implements CursosQueries {
 				criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
 			}			
 			
-			if(isDisciplinaPresente(filtro)) {
-				criteria.add(Restrictions.eq("disciplina", filtro.getDisciplina()));
+			criteria.createAlias("disciplinas", "d", JoinType.LEFT_OUTER_JOIN);
+			if(filtro.getDisciplinas() != null && ! filtro.getDisciplinas().isEmpty()) {
+				List<Criterion> subqueries = new ArrayList<>();
+				
+				for (Long codigoDisciplina : filtro.getDisciplinas().stream().mapToLong(Disciplina::getCodigo).toArray()) {
+					
+					DetachedCriteria dc = DetachedCriteria.forClass(CursoDisciplina.class);
+					dc.add(Restrictions.eqOrIsNull("id.disciplina.codigo", codigoDisciplina));
+					dc.setProjection(Projections.property("id.curso"));
+					subqueries.add(Subqueries.propertyIn("codigo", dc));
+				}
+				
+				Criterion[] criterions = new Criterion[subqueries.size()];
+				criteria.add(Restrictions.and(subqueries.toArray(criterions)));
+				
 			}
 			
 			if(isTipoPresente(filtro)) {
@@ -74,9 +106,9 @@ public class CursosImpl implements CursosQueries {
 		}
 	}
 		
-	private boolean isDisciplinaPresente(CursoFilter filtro) {
-		return filtro.getDisciplina() != null && filtro.getDisciplina().getCodigo() != null;
-	}
+//	private boolean isDisciplinaPresente(CursoFilter filtro) {
+//		return filtro.getDisciplina() != null && filtro.getDisciplina().getCodigo() != null;
+//	}
 	
 	private boolean isTipoPresente(CursoFilter filtro) {
 		return filtro.getTipoCurso() != null && filtro.getTipoCurso().getCodigo() != null;
@@ -91,5 +123,5 @@ public class CursosImpl implements CursosQueries {
 				.getResultList();
 				
 		return cursosFitrados;
-	}
+	}	
 }

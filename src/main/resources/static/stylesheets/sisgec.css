@@ -88,7 +88,7 @@
 
 /*
 ###################
-# P�GINAS DO SISTEMA
+# PÁGINAS DO SISTEMA
 ###################
 */
 
@@ -138,32 +138,63 @@
 	color: red;
 }
 
+/* Inicio das Colunas - Pesquisa de ALUNOS */
 .table-alunos-col-nome {
-	width: 480px;
+	width: 140px;
+	
 }
 
 .table-alunos-col-tipoPessoa {
-	width: 240px;
+	width: 40px;
+	
 }
 
 .table-alunos-col-docReceita {
-	width: 240px;
+	width: 100px;
+	text-align: center;
+	
 }
 
 .table-alunos-col-telefone {
-	width: 120px;
+	width: 80px;
+	text-align: center;
 }
 
 .table-alunos-col-cidade-estado {
-	width: 140px;
-	text-align: right;
+	width: 80px;
+	text-align: center;
 }
 
-/* Colunas - Pesquisa de usu�rios */
+
+.table-cursos-col-acoes {
+	
+	text-align: center;
+}
+
+/* Fim das Colunas - Pesquisa de ALUNOS */
+
+
+
+/* Colunas - Pesquisa de usuarios */
 .table-usuarios-col-status {
 	width: 30px;
 }
 
+/* Colunas - Pesquisa de tipos de cursos */
+.table-tiposCursos-col-codigo {
+	width: 120px;
+	text-align: center;
+}
+
+
+.table-tiposCursos-col-nome {
+	
+}
+
+.table-tiposCursos-col-acoes {
+	width: 120px;
+	text-align: center;
+}
 
 
 /* Tabela Simples */
@@ -184,13 +215,26 @@
 
 /* Colunas - Pesquisa de cidades */
 .table-cidades-col-nome {
-	
+	width: 180px;
+	text-align: center;
 }
 
 .table-cidades-col-estado {
-	width: 140px;
+	width: 480px;
+	text-align: center;
+}
+
+.table-cidades-col-acoes {
+	width: 240px;
 	text-align: right;
 }
+
+/* Colunas - Pesquisa de vendas */
+.table-vendas-col-acoes{
+	text-align: center;
+}
+
+
 
 /* Tabela Cursos página de Venda */
 .marajo-tabela-cursos {
